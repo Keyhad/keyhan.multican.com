@@ -1,0 +1,13 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "words": [
+    "keyhan",
+    "multican",
+    "loopia"
+  ],
+  "ignorePaths": [
+    "node_modules/**",
+    "package-lock.json"
+  ]
+}

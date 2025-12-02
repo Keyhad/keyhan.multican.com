@@ -1,0 +1,59 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate and Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint HTML
+        run: npm run lint:html
+
+      - name: Lint CSS
+        run: npm run lint:css
+
+      - name: Lint JavaScript
+        run: npm run lint:js
+
+      - name: Spell Check
+        run: npm run spell
+
+  deploy:
+    name: Deploy to Loopia
+    needs: validate
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy via SFTP
+        # v4.3.5 pinned to commit for supply chain security
+        uses: SamKirkland/FTP-Deploy-Action@2db33d854c529dea8810fe1828cf3696cce89b36
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          local-dir: ./src/
+          server-dir: /

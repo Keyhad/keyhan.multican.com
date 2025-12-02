@@ -1,0 +1,24 @@
+{
+  "name": "keyhan.multican.com",
+  "version": "1.0.0",
+  "description": "Static pages for keyhan.multican.com",
+  "private": true,
+  "scripts": {
+    "lint": "npm run lint:html && npm run lint:css && npm run lint:js",
+    "lint:html": "html-validate 'src/**/*.html'",
+    "lint:css": "stylelint 'src/**/*.css'",
+    "lint:js": "eslint 'src/**/*.js'",
+    "spell": "cspell 'src/**/*.{html,css,js}'",
+    "test": "npm run lint && npm run spell"
+  },
+  "devDependencies": {
+    "cspell": "^8.6.0",
+    "eslint": "^8.57.0",
+    "html-validate": "^8.18.0",
+    "stylelint": "^16.2.0",
+    "stylelint-config-standard": "^36.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
