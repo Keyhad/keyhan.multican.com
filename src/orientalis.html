@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soft Girih Watch - Static Lighting</title>
+    <style>
+        :root {
+            --bg-body: #000000;
+            --dial-gradient-inner: #1a2639; 
+            --dial-gradient-mid: #0f1520;   
+            --dial-gradient-outer: #000000; 
+            --hour-active: #ff004c;    
+            --minute-active: #00f2ff;  
+            --second-active: #ffaa00;  
+            --light-inactive: rgba(255, 255, 255, 0.03); 
+            --line-color: #445566;     
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-body);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .watch-container {
+            position: relative;
+            width: 90vmin;
+            height: 90vmin;
+            max-width: 600px;
+            max-height: 600px;
+            border-radius: 50%;
+            box-shadow: 
+                0 0 0 2px #111,
+                0 0 0 8px #050505,
+                0 20px 50px rgba(0,0,0,1),
+                inset 0 0 80px rgba(0,0,0,1);
+            background: #000;
+            overflow: hidden;
+        }
+
+        svg {
+            width: 100%;
+            height: 100%;
+            transform: rotate(-90deg); 
+        }
+
+        #dial-cover {
+            fill: url(#midnight-vignette);
+            mask: url(#dial-holes-mask); 
+        }
+
+        .shape {
+            fill: none; 
+            stroke: var(--line-color);
+            stroke-width: 0.8px;
+            stroke-linejoin: round;
+            stroke-linecap: round;
+            opacity: 0.8;
+        }
+
+        .hour-shape { 
+            stroke-width: 1.2px; 
+            stroke: url(#metallic-sheen); 
+            fill: url(#hour-lens-grad);   
+            filter: url(#rim-shadow);     
+            opacity: 1;
+        }
+
+        .hour-cardinal { stroke-width: 1.8px; opacity: 1; }
+        .minute-slot-outline { stroke: #223344; }
+        .landmark { stroke: #556677; stroke-width: 1.2px; }
+        .backlight-shape { stroke: none; fill: var(--light-inactive); }
+
+        .cursor-group { transform-origin: 0px 0px; }
+
+        .hour-cursor-shape {
+            fill: var(--hour-active);
+            filter: drop-shadow(0 0 8px var(--hour-active)) drop-shadow(0 0 20px var(--hour-active));
+        }
+
+        .minute-cursor-shape {
+            fill: var(--minute-active);
+            filter: drop-shadow(0 0 5px var(--minute-active)) drop-shadow(0 0 12px var(--minute-active));
+        }
+
+        .second-cursor-shape {
+            fill: var(--second-active); 
+            stroke: none;
+            filter: drop-shadow(0 0 4px var(--second-active)) drop-shadow(0 0 8px var(--second-active));
+            mix-blend-mode: screen;
+        }
+
+        .complication-text {
+            fill: #00ffff; 
+            mix-blend-mode: difference; 
+            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            font-weight: 700; 
+            text-anchor: middle;
+            dominant-baseline: central; 
+            pointer-events: none;
+            opacity: 0.9;
+        }
+        .month-label { font-size: 8.5px; letter-spacing: 0.05em; }
+        .date-label { font-size: 11px; letter-spacing: 0.1em; }
+        
+        /* --- MECHANICAL CENTER STYLES --- */
+        
+        /* This is the static rectangle that holds the gradient */
+        .metal-texture-fill {
+            fill: url(#brushed-metal);
+            pointer-events: none;
+        }
+
+        /* This is the visible outline of the star */
+        .star-outline {
+            fill: none;
+            stroke: #aaaaaa;
+            stroke-width: 0.5px;
+            filter: url(#gear-shadow);
+        }
+
+        /* The bolt is now static */
+        .center-bolt {
+            fill: url(#bolt-head);
+            stroke: #d4af37; 
+            stroke-width: 1.5px;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="watch-container">
+    <svg viewBox="-100 -100 200 200" id="watchFace">
+        <defs>
+            <radialGradient id="midnight-vignette" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+                <stop offset="0%" style="stop-color:var(--dial-gradient-inner); stop-opacity:1" />
+                <stop offset="60%" style="stop-color:var(--dial-gradient-mid); stop-opacity:1" />
+                <stop offset="100%" style="stop-color:var(--dial-gradient-outer); stop-opacity:1" />
+            </radialGradient>
+            
+            <radialGradient id="hour-lens-grad" cx="30%" cy="30%" r="80%" fx="30%" fy="30%">
+                <stop offset="0%" style="stop-color:rgba(255,255,255,0.15); stop-opacity:1" />
+                <stop offset="100%" style="stop-color:rgba(0,0,0,0.4); stop-opacity:1" />
+            </radialGradient>
+
+            <linearGradient id="metallic-sheen" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#aaccff; stop-opacity:1" />
+                <stop offset="50%" style="stop-color:#445566; stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#112233; stop-opacity:1" />
+            </linearGradient>
+
+            <!-- Brushed Metal Gradient (Static Light Source) -->
+            <linearGradient id="brushed-metal" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#222" />
+                <stop offset="20%" stop-color="#666" />
+                <stop offset="40%" stop-color="#222" />
+                <stop offset="50%" stop-color="#fff" /> <!-- Highlight -->
+                <stop offset="60%" stop-color="#222" />
+                <stop offset="80%" stop-color="#555" />
+                <stop offset="100%" stop-color="#111" />
+            </linearGradient>
+
+            <!-- Bolt Head Gradient -->
+            <radialGradient id="bolt-head" cx="50%" cy="50%" r="50%" fx="30%" fy="30%">
+                <stop offset="0%" stop-color="#ffffff" />
+                <stop offset="40%" stop-color="#555555" />
+                <stop offset="100%" stop-color="#000000" />
+            </radialGradient>
+
+            <filter id="rim-shadow" x="-50%" y="-50%" width="200%" height="200%">
+                <feDropShadow dx="0.5" dy="1" stdDeviation="1" flood-color="black" flood-opacity="0.8"/>
+            </filter>
+
+            <filter id="gear-shadow" x="-50%" y="-50%" width="200%" height="200%">
+                <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="black" flood-opacity="0.9"/>
+            </filter>
+
+            <mask id="dial-holes-mask">
+                <rect x="-150" y="-150" width="300" height="300" fill="white" />
+                <g id="mask-holes-group" fill="black"></g>
+            </mask>
+
+            <!-- DEFINITION FOR THE STAR SHAPE -->
+            <!-- We populate this path via JS, then use it in mask and stroke -->
+            <path id="star-geom-def" />
+
+            <!-- THE MASK: The shape inside here rotates -->
+            <mask id="rotating-star-mask">
+                <rect x="-50" y="-50" width="100" height="100" fill="black" />
+                <!-- This 'use' element will be rotated by JS -->
+                <use id="mask-star-rotator" href="#star-geom-def" fill="white" />
+            </mask>
+        </defs>
+
+        <!-- LAYER 1: Background -->
+        <g id="static-grid-group"></g>
+
+        <!-- LAYER 2: Cursors -->
+        <g id="hour-cursor-group" class="cursor-group"></g>
+        <g id="minute-cursor-group" class="cursor-group"></g>
+        <g id="second-cursor-group" class="cursor-group"></g>
+
+        <!-- LAYER 3: Dial Cover -->
+        <circle id="dial-cover" cx="0" cy="0" r="100"></circle>
+
+        <!-- LAYER 4: Rings -->
+        <g id="hour-ring"></g>
+        <g id="minute-ring-outlines"></g>
+        
+        <!-- LAYER 5: The Mechanical Center -->
+        
+        <!-- 5a. The Fill (Static Gradient, Rotating Mask) -->
+        <!-- This rect stays still, so the gradient stays still. The mask spins. -->
+        <rect x="-30" y="-30" width="60" height="60" 
+              class="metal-texture-fill" 
+              mask="url(#rotating-star-mask)" />
+
+        <!-- 5b. The Stroke (Rotates) -->
+        <!-- This provides the bevel edge and shadow. It must rotate. -->
+        <use id="star-stroke-rotator" href="#star-geom-def" class="star-outline" />
+
+        <!-- 5c. The Bolt (Static) -->
+        <!-- Sits on top, does not rotate -->
+        <circle cx="0" cy="0" r="5" class="center-bolt" />
+
+        <!-- Complications -->
+        <text id="date-text" class="complication-text date-label" x="0" y="48" transform="rotate(90, 0, 48)">DATE</text>
+        <text id="month-text" class="complication-text month-label" x="0" y="-48" transform="rotate(90, 0, -48)">MTH</text>
+    </svg>
+</div>
+
+<script>
+    const maskHolesGroup = document.getElementById('mask-holes-group');
+    const staticGridGroup = document.getElementById('static-grid-group');
+    
+    const hourRingGroup = document.getElementById('hour-ring');
+    const minuteOutlineGroup = document.getElementById('minute-ring-outlines');
+    
+    // Elements for the mechanical center
+    const starGeomDef = document.getElementById('star-geom-def');
+    const maskStarRotator = document.getElementById('mask-star-rotator');
+    const starStrokeRotator = document.getElementById('star-stroke-rotator');
+
+    const dateText = document.getElementById('date-text');
+    const monthText = document.getElementById('month-text');
+
+    const secondCursorGroup = document.getElementById('second-cursor-group');
+    const minuteCursorGroup = document.getElementById('minute-cursor-group');
+    const hourCursorGroup = document.getElementById('hour-cursor-group');
+
+    const OUTER_RING_CONFIG = { r1: 70, r2: 82, r3: 94, widthAngle: 2.2, roundness: 0.2 };
+    const HOUR_RING_CONFIG = { r1: 25, r2: 48, r3: 65, angleSpread: 12, roundness: 0.15 };
+
+    function createPath(d, className, id) {
+        const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        path.setAttribute("d", d);
+        if (className) path.setAttribute("class", className);
+        if (id) path.setAttribute("id", id);
+        return path;
+    }
+
+    function polarToCartesian(radius, angleInDegrees) {
+        const angleInRadians = (angleInDegrees) * Math.PI / 180.0;
+        return {
+            x: (radius * Math.cos(angleInRadians)),
+            y: (radius * Math.sin(angleInRadians))
+        };
+    }
+
+    function createRoundedDiamondPath(p1, p2, p3, p4, roundness) {
+        const lerp = (a, b, t) => ({ x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t });
+        const p1_a = lerp(p1, p2, roundness);
+        const p2_b = lerp(p2, p1, roundness);
+        const p2_a = lerp(p2, p3, roundness);
+        const p3_b = lerp(p3, p2, roundness);
+        const p3_a = lerp(p3, p4, roundness);
+        const p4_b = lerp(p4, p3, roundness);
+        const p4_a = lerp(p4, p1, roundness);
+        const p1_b = lerp(p1, p4, roundness);
+
+        return `M ${p1_a.x} ${p1_a.y} 
+                L ${p2_b.x} ${p2_b.y} Q ${p2.x} ${p2.y} ${p2_a.x} ${p2_a.y}
+                L ${p3_b.x} ${p3_b.y} Q ${p3.x} ${p3.y} ${p3_a.x} ${p3_a.y}
+                L ${p4_b.x} ${p4_b.y} Q ${p4.x} ${p4.y} ${p4_a.x} ${p4_a.y}
+                L ${p1_b.x} ${p1_b.y} Q ${p1.x} ${p1.y} ${p1_a.x} ${p1_a.y} Z`;
+    }
+
+    function defineCenterStar() {
+        const points = 12;
+        const outerRadius = 18;
+        const innerRadius = 8;
+        const roundness = 0.35; 
+
+        const vertices = [];
+        for (let i = 0; i < points * 2; i++) {
+            let r = (i % 2 === 0) ? outerRadius : innerRadius;
+            let angle = i * (360 / (points * 2));
+            vertices.push(polarToCartesian(r, angle));
+        }
+
+        const lerp = (p1, p2, t) => ({ x: p1.x + (p2.x - p1.x) * t, y: p1.y + (p2.y - p1.y) * t });
+
+        let d = "";
+        const len = vertices.length;
+        const startPoint = lerp(vertices[len - 1], vertices[0], 0.5);
+        d += `M ${startPoint.x} ${startPoint.y} `;
+        for (let i = 0; i < len; i++) {
+            const current = vertices[i];
+            const next = vertices[(i + 1) % len];
+            const prev = vertices[(i - 1 + len) % len];
+            const pStartCurve = lerp(prev, current, 1 - roundness);
+            const pEndCurve = lerp(current, next, roundness);
+            d += `L ${pStartCurve.x} ${pStartCurve.y} `;
+            d += `Q ${current.x} ${current.y} ${pEndCurve.x} ${pEndCurve.y} `;
+        }
+        d += "Z "; 
+        
+        // Set this path data to the definition in <defs>
+        starGeomDef.setAttribute("d", d);
+    }
+
+    function getHourPathData(angle) {
+        const r1 = HOUR_RING_CONFIG.r1; 
+        const r2 = HOUR_RING_CONFIG.r2; 
+        const r3 = HOUR_RING_CONFIG.r3; 
+        const p1 = polarToCartesian(r1, angle); 
+        const p2 = polarToCartesian(r2, angle + HOUR_RING_CONFIG.angleSpread); 
+        const p3 = polarToCartesian(r3, angle); 
+        const p4 = polarToCartesian(r2, angle - HOUR_RING_CONFIG.angleSpread); 
+        return createRoundedDiamondPath(p1, p2, p3, p4, HOUR_RING_CONFIG.roundness);
+    }
+
+    function getMinutePathData(angle) {
+        const p1 = polarToCartesian(OUTER_RING_CONFIG.r1, angle);
+        const p2 = polarToCartesian(OUTER_RING_CONFIG.r2, angle + OUTER_RING_CONFIG.widthAngle);
+        const p3 = polarToCartesian(OUTER_RING_CONFIG.r3, angle);
+        const p4 = polarToCartesian(OUTER_RING_CONFIG.r2, angle - OUTER_RING_CONFIG.widthAngle);
+        return createRoundedDiamondPath(p1, p2, p3, p4, OUTER_RING_CONFIG.roundness);
+    }
+
+    function drawStaticGrid() {
+        for (let i = 0; i < 12; i++) {
+            const angle = i * 30; 
+            let d = getHourPathData(angle);
+            maskHolesGroup.appendChild(createPath(d, null));
+            let className = "shape hour-shape";
+            if (i % 3 === 0) className += " hour-cardinal";
+            hourRingGroup.appendChild(createPath(d, className));
+            staticGridGroup.appendChild(createPath(d, "backlight-shape"));
+        }
+
+        for (let i = 0; i < 60; i++) {
+            const angle = i * 6;
+            let d = getMinutePathData(angle);
+            maskHolesGroup.appendChild(createPath(d, null));
+            let className = "shape minute-slot-outline";
+            if (i % 5 === 0) className += " landmark";
+            minuteOutlineGroup.appendChild(createPath(d, className));
+            staticGridGroup.appendChild(createPath(d, "backlight-shape"));
+        }
+    }
+
+    function createCursors() {
+        const hourD = getHourPathData(0);
+        hourCursorGroup.appendChild(createPath(hourD, "hour-cursor-shape"));
+
+        const minD = getMinutePathData(0);
+        minuteCursorGroup.appendChild(createPath(minD, "minute-cursor-shape"));
+
+        const angle = 0;
+        const expand = 2; 
+        const p1 = polarToCartesian(OUTER_RING_CONFIG.r1 - expand, angle);
+        const p2 = polarToCartesian(OUTER_RING_CONFIG.r2, angle + OUTER_RING_CONFIG.widthAngle + 1.5);
+        const p3 = polarToCartesian(OUTER_RING_CONFIG.r3 + expand, angle);
+        const p4 = polarToCartesian(OUTER_RING_CONFIG.r2, angle - OUTER_RING_CONFIG.widthAngle - 1.5);
+        let secD = createRoundedDiamondPath(p1, p2, p3, p4, OUTER_RING_CONFIG.roundness);
+        secondCursorGroup.appendChild(createPath(secD, "second-cursor-shape"));
+    }
+
+    defineCenterStar();
+    drawStaticGrid();
+    createCursors();
+
+    const monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+
+    function updateClock() {
+        const now = new Date();
+        const hours = now.getHours();
+        const minutes = now.getMinutes();
+        const seconds = now.getSeconds();
+        const ms = now.getMilliseconds();
+        const date = now.getDate();
+        const monthIndex = now.getMonth();
+
+        const secAngle = (seconds + ms / 1000) * 6;
+        const minAngle = (minutes * 6) + (seconds / 60 * 6) + (ms / 60000 * 6);
+        const hourAngle = ((hours % 12) * 30) + (minutes / 60 * 30);
+
+        secondCursorGroup.style.transform = `rotate(${secAngle}deg)`;
+        minuteCursorGroup.style.transform = `rotate(${minAngle}deg)`;
+        hourCursorGroup.style.transform = `rotate(${hourAngle}deg)`;
+        
+        // Rotate the Star Mask and the Star Stroke
+        // We do NOT rotate the gradient rect or the bolt
+        const rotateTransform = `rotate(${secAngle}deg)`;
+        maskStarRotator.style.transform = rotateTransform;
+        starStrokeRotator.style.transform = rotateTransform;
+
+        dateText.textContent = date < 10 ? "0" + date : date;
+        monthText.textContent = monthNames[monthIndex];
+        
+        requestAnimationFrame(updateClock);
+    }
+    updateClock();
+</script>
+</body>
+</html>
