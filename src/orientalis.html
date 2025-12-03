@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Soft Girih Watch - Static Lighting</title>
+    <title>Soft Girih Watch - Gold Tip</title>
     <style>
         :root {
             --bg-body: #000000;
@@ -112,13 +112,11 @@
         
         /* --- MECHANICAL CENTER STYLES --- */
         
-        /* This is the static rectangle that holds the gradient */
         .metal-texture-fill {
             fill: url(#brushed-metal);
             pointer-events: none;
         }
 
-        /* This is the visible outline of the star */
         .star-outline {
             fill: none;
             stroke: #aaaaaa;
@@ -126,11 +124,18 @@
             filter: url(#gear-shadow);
         }
 
-        /* The bolt is now static */
         .center-bolt {
             fill: url(#bolt-head);
             stroke: #d4af37; 
             stroke-width: 1.5px;
+        }
+
+        /* The new Gold Tip Style */
+        .star-gold-tip {
+            fill: url(#gold-gradient);
+            stroke: none;
+            /* Slight blend mode to make it look integrated */
+            mix-blend-mode: normal; 
         }
 
     </style>
@@ -157,15 +162,23 @@
                 <stop offset="100%" style="stop-color:#112233; stop-opacity:1" />
             </linearGradient>
 
-            <!-- Brushed Metal Gradient (Static Light Source) -->
+            <!-- Brushed Metal Gradient -->
             <linearGradient id="brushed-metal" x1="0%" y1="0%" x2="0%" y2="100%">
                 <stop offset="0%" stop-color="#222" />
                 <stop offset="20%" stop-color="#666" />
                 <stop offset="40%" stop-color="#222" />
-                <stop offset="50%" stop-color="#fff" /> <!-- Highlight -->
+                <stop offset="50%" stop-color="#fff" /> 
                 <stop offset="60%" stop-color="#222" />
                 <stop offset="80%" stop-color="#555" />
                 <stop offset="100%" stop-color="#111" />
+            </linearGradient>
+
+            <!-- Gold Gradient for the Tip -->
+            <linearGradient id="gold-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ffeebb" />
+                <stop offset="30%" stop-color="#eebb00" />
+                <stop offset="60%" stop-color="#cc8800" />
+                <stop offset="100%" stop-color="#aa6600" />
             </linearGradient>
 
             <!-- Bolt Head Gradient -->
@@ -189,13 +202,14 @@
             </mask>
 
             <!-- DEFINITION FOR THE STAR SHAPE -->
-            <!-- We populate this path via JS, then use it in mask and stroke -->
             <path id="star-geom-def" />
+
+            <!-- DEFINITION FOR THE GOLD TIP -->
+            <path id="star-tip-def" />
 
             <!-- THE MASK: The shape inside here rotates -->
             <mask id="rotating-star-mask">
                 <rect x="-50" y="-50" width="100" height="100" fill="black" />
-                <!-- This 'use' element will be rotated by JS -->
                 <use id="mask-star-rotator" href="#star-geom-def" fill="white" />
             </mask>
         </defs>
@@ -218,17 +232,18 @@
         <!-- LAYER 5: The Mechanical Center -->
         
         <!-- 5a. The Fill (Static Gradient, Rotating Mask) -->
-        <!-- This rect stays still, so the gradient stays still. The mask spins. -->
         <rect x="-30" y="-30" width="60" height="60" 
               class="metal-texture-fill" 
               mask="url(#rotating-star-mask)" />
 
-        <!-- 5b. The Stroke (Rotates) -->
-        <!-- This provides the bevel edge and shadow. It must rotate. -->
+        <!-- 5b. The Gold Tip (Rotates) -->
+        <!-- This sits ON TOP of the metal fill, but BELOW the stroke outline -->
+        <use id="star-tip-rotator" href="#star-tip-def" class="star-gold-tip" />
+
+        <!-- 5c. The Stroke (Rotates) -->
         <use id="star-stroke-rotator" href="#star-geom-def" class="star-outline" />
 
-        <!-- 5c. The Bolt (Static) -->
-        <!-- Sits on top, does not rotate -->
+        <!-- 5d. The Bolt (Static) -->
         <circle cx="0" cy="0" r="5" class="center-bolt" />
 
         <!-- Complications -->
@@ -246,8 +261,11 @@
     
     // Elements for the mechanical center
     const starGeomDef = document.getElementById('star-geom-def');
+    const starTipDef = document.getElementById('star-tip-def');
+    
     const maskStarRotator = document.getElementById('mask-star-rotator');
     const starStrokeRotator = document.getElementById('star-stroke-rotator');
+    const starTipRotator = document.getElementById('star-tip-rotator');
 
     const dateText = document.getElementById('date-text');
     const monthText = document.getElementById('month-text');
@@ -300,6 +318,7 @@
         const roundness = 0.35; 
 
         const vertices = [];
+        // Generate vertices
         for (let i = 0; i < points * 2; i++) {
             let r = (i % 2 === 0) ? outerRadius : innerRadius;
             let angle = i * (360 / (points * 2));
@@ -308,6 +327,7 @@
 
         const lerp = (p1, p2, t) => ({ x: p1.x + (p2.x - p1.x) * t, y: p1.y + (p2.y - p1.y) * t });
 
+        // 1. Create the Full Star Path
         let d = "";
         const len = vertices.length;
         const startPoint = lerp(vertices[len - 1], vertices[0], 0.5);
@@ -316,15 +336,44 @@
             const current = vertices[i];
             const next = vertices[(i + 1) % len];
             const prev = vertices[(i - 1 + len) % len];
-            const pStartCurve = lerp(prev, current, 1 - roundness);
+            // Calculate curve control points based on roundness
             const pEndCurve = lerp(current, next, roundness);
+            const pStartCurve = lerp(prev, current, 1 - roundness);
+            
             d += `L ${pStartCurve.x} ${pStartCurve.y} `;
             d += `Q ${current.x} ${current.y} ${pEndCurve.x} ${pEndCurve.y} `;
         }
         d += "Z "; 
-        
-        // Set this path data to the definition in <defs>
         starGeomDef.setAttribute("d", d);
+
+        // 2. Create the Single Gold Tip Path
+        // We want the tip at index 0.
+        // We need the segment from the previous valley (index 23) to the tip (0) to the next valley (1).
+        // And we connect it to the center (0,0) to fill it.
+        
+        const tipIdx = 0;
+        const prevIdx = len - 1;
+        const nextIdx = 1;
+
+        const vTip = vertices[tipIdx];
+        const vPrev = vertices[prevIdx];
+        const vNext = vertices[nextIdx];
+
+        // Logic from loop above, isolated for these specific segments
+        // Segment entering the tip
+        const pStartEnter = lerp(vPrev, vTip, 1 - roundness);
+        const pEndEnter = lerp(vTip, vNext, roundness);
+
+        // We need to start at the center to make a wedge
+        let tipD = `M 0 0 `; 
+        // Line to the start of the curve on the left side
+        tipD += `L ${pStartEnter.x} ${pStartEnter.y} `;
+        // Curve around the tip
+        tipD += `Q ${vTip.x} ${vTip.y} ${pEndEnter.x} ${pEndEnter.y} `;
+        // Close back to center
+        tipD += `Z`;
+
+        starTipDef.setAttribute("d", tipD);
     }
 
     function getHourPathData(angle) {
@@ -408,11 +457,11 @@
         minuteCursorGroup.style.transform = `rotate(${minAngle}deg)`;
         hourCursorGroup.style.transform = `rotate(${hourAngle}deg)`;
         
-        // Rotate the Star Mask and the Star Stroke
-        // We do NOT rotate the gradient rect or the bolt
+        // Rotate the Star Mask, the Star Stroke, AND the Gold Tip
         const rotateTransform = `rotate(${secAngle}deg)`;
         maskStarRotator.style.transform = rotateTransform;
         starStrokeRotator.style.transform = rotateTransform;
+        starTipRotator.style.transform = rotateTransform;
 
         dateText.textContent = date < 10 ? "0" + date : date;
         monthText.textContent = monthNames[monthIndex];
