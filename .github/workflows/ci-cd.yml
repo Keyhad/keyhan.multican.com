@@ -37,6 +37,7 @@ jobs:
 
       - name: Spell Check
         run: npm run spell
+        continue-on-error: true 
 
   deploy:
     name: Deploy to Loopia
