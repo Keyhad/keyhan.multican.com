@@ -3,43 +3,275 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Persian Girih Watch - Bezel</title>
+    <title>Persian Watch - Extended Collection</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rakkas&display=swap" rel="stylesheet">
 
     <style>
+        /* --- THEME DEFINITIONS --- */
+
+        /* 1. ISFAHAN (Default - Blue/Gold/Turquoise Tiles) */
         :root {
-            /* PALETTE: Isfahan / Haft Rang */
-            --bg-body: #010205; 
+            --bg-body: #010205;
             
-            /* Dome Gradient */
-            --dial-gradient-inner: #1a237e; 
-            --dial-gradient-mid: #0d1333;   
-            --dial-gradient-outer: #000000; 
-            
-            /* Hands/Cursors */
+            /* Dial Background Gradient */
+            --dial-g1: #1a237e; 
+            --dial-g2: #0d1333;
+            --dial-g3: #000000;
+
+            /* Bezel Gradient (Ceramic) */
+            --bezel-g1: #00695c;
+            --bezel-g2: #004d40;
+            --bezel-g3: #00251a;
+            --bezel-rim: #4e342e;
+            --bezel-text: #fffde7;
+
+            /* Hour Marker Glaze */
+            --hour-glaze-1: #4dd0e1;
+            --hour-glaze-2: #1a237e;
+            --hour-glaze-3: #ffd700;
+
+            /* Center Star Ceramic */
+            --star-g1: #80deea;
+            --star-g2: #0097a7;
+            --star-g3: #006064;
+            --star-g4: #000000;
+
+            /* Numerals (Aged Gold) */
+            --text-g1: #fff9c4;
+            --text-g2: #ffca28;
+            --text-g3: #ff6f00;
+
+            /* Active Lights (Cursors) */
             --hour-active: #ffc107;    
             --minute-active: #26c6da;  
             --second-active: #ff6f00;  
-            
-            /* Grid Lines */
-            --line-color: #c5a059;     
-            --line-opacity: 0.4;
-            
-            /* Inactive slots backlight */
-            --light-inactive: rgba(38, 198, 218, 0.03); 
-            
-            /* The specific color requested (3 o'clock border) */
             --cardinal-gold: #ffe082;
 
-            /* Bezel Colors */
-            --bezel-bg: #004d40; /* Deep Teal/Ceramic Green */
-            --bezel-text: #fffde7; /* Off-white/Lume */
-            --bezel-rim: #4e342e; /* Dark Bronze */
+            /* Grid Lines */
+            --line-color: #c5a059;     
+            --light-inactive: rgba(38, 198, 218, 0.03); 
         }
 
+        /* 2. KASHAN (Rug - Deep Red/Navy/Cream) */
+        body.theme-kashan {
+            --bg-body: #0a0000;
+
+            --dial-g1: #68000d; /* Madder Red */
+            --dial-g2: #3e0008;
+            --dial-g3: #1a0002;
+
+            --bezel-g1: #1a237e; /* Navy border common in rugs */
+            --bezel-g2: #0d1333;
+            --bezel-g3: #000011;
+            --bezel-rim: #8d6e63;
+            --bezel-text: #fff8e1; /* Cream/Ivory */
+
+            --hour-glaze-1: #ff8a80;
+            --hour-glaze-2: #b71c1c;
+            --hour-glaze-3: #ffcdd2;
+
+            --star-g1: #ffcdd2;
+            --star-g2: #b71c1c;
+            --star-g3: #7f0000;
+            --star-g4: #210000;
+
+            --text-g1: #ffffff;
+            --text-g2: #ffebee;
+            --text-g3: #ef9a9a;
+
+            --hour-active: #ffab91;    
+            --minute-active: #fff59d;  
+            --second-active: #ff1744;  
+            --cardinal-gold: #ffccbc;
+
+            --line-color: #d7ccc8;     
+            --light-inactive: rgba(255, 205, 210, 0.05); 
+        }
+
+        /* 3. YAZD (Desert - Sand/Adobe/Turquoise Water) */
+        body.theme-yazd {
+            --bg-body: #1a1510;
+
+            --dial-g1: #8d6e63; /* Adobe/Earth */
+            --dial-g2: #5d4037;
+            --dial-g3: #3e2723;
+
+            --bezel-g1: #a1887f;
+            --bezel-g2: #795548;
+            --bezel-g3: #4e342e;
+            --bezel-rim: #3e2723;
+            --bezel-text: #e0f7fa; /* Water contrast */
+
+            --hour-glaze-1: #00bcd4; /* Turquoise Oasis */
+            --hour-glaze-2: #006064;
+            --hour-glaze-3: #e0f7fa;
+
+            --star-g1: #4dd0e1;
+            --star-g2: #00acc1;
+            --star-g3: #006064;
+            --star-g4: #000000;
+
+            --text-g1: #fff3e0;
+            --text-g2: #ffe0b2;
+            --text-g3: #ffcc80;
+
+            --hour-active: #00e5ff;    
+            --minute-active: #ffcc80;  
+            --second-active: #ff6e40;  
+            --cardinal-gold: #4dd0e1;
+
+            --line-color: #bcaaa4;     
+            --light-inactive: rgba(77, 208, 225, 0.05); 
+        }
+
+        /* 4. SHIRAZ (Night/Poetry - Indigo/Purple/Silver) */
+        body.theme-shiraz {
+            --bg-body: #020005;
+
+            --dial-g1: #4a148c; /* Deep Purple */
+            --dial-g2: #311b92;
+            --dial-g3: #12002e;
+
+            --bezel-g1: #263238; /* Dark Slate */
+            --bezel-g2: #102027;
+            --bezel-g3: #000a12;
+            --bezel-rim: #90a4ae;
+            --bezel-text: #eceff1; 
+
+            --hour-glaze-1: #e1bee7;
+            --hour-glaze-2: #7b1fa2;
+            --hour-glaze-3: #f3e5f5;
+
+            --star-g1: #b39ddb;
+            --star-g2: #5e35b1;
+            --star-g3: #311b92;
+            --star-g4: #000000;
+
+            --text-g1: #ffffff;
+            --text-g2: #cfd8dc;
+            --text-g3: #90a4ae; /* Silver Text */
+
+            --hour-active: #e040fb;    
+            --minute-active: #b2ebf2;  
+            --second-active: #7c4dff;  
+            --cardinal-gold: #e1bee7;
+
+            --line-color: #78909c;     
+            --light-inactive: rgba(224, 64, 251, 0.04); 
+        }
+
+        /* 5. KERMAN (Floral/Pistachio - Olive/Pink/Cream) */
+        body.theme-kerman {
+            --bg-body: #0f140a;
+
+            --dial-g1: #33691e; /* Deep Olive/Pistachio Leaf */
+            --dial-g2: #1b5e20;
+            --dial-g3: #051002;
+
+            --bezel-g1: #558b2f;
+            --bezel-g2: #33691e;
+            --bezel-g3: #1b5e20;
+            --bezel-rim: #8d6e63; /* Wood tone */
+            --bezel-text: #f1f8e9; 
+
+            --hour-glaze-1: #f48fb1; /* Rose Pink */
+            --hour-glaze-2: #ad1457;
+            --hour-glaze-3: #fce4ec;
+
+            --star-g1: #dcedc8; /* Light Pistachio */
+            --star-g2: #8bc34a;
+            --star-g3: #33691e;
+            --star-g4: #000000;
+
+            --text-g1: #fffde7;
+            --text-g2: #fff59d;
+            --text-g3: #f0f4c3;
+
+            --hour-active: #f06292;    /* Rose */
+            --minute-active: #cddc39;  /* Lime */
+            --second-active: #e91e63;  /* Deep Pink */
+            --cardinal-gold: #f8bbd0;
+
+            --line-color: #a5d6a7;     
+            --light-inactive: rgba(244, 143, 177, 0.05); 
+        }
+
+        /* 6. QOM (Silk/Mirror - Silver/Teal/Glass) */
+        body.theme-qom {
+            --bg-body: #000505;
+
+            --dial-g1: #37474f; /* Gunmetal/Silk Grey */
+            --dial-g2: #263238;
+            --dial-g3: #000000;
+
+            --bezel-g1: #b0bec5; /* Silver/Platinum */
+            --bezel-g2: #78909c;
+            --bezel-g3: #455a64;
+            --bezel-rim: #eceff1;
+            --bezel-text: #000000; /* Dark text on light bezel */
+
+            --hour-glaze-1: #80deea; /* Cyan/Glass */
+            --hour-glaze-2: #006064;
+            --hour-glaze-3: #e0f7fa;
+
+            --star-g1: #ffffff;
+            --star-g2: #b0bec5;
+            --star-g3: #546e7a;
+            --star-g4: #000000;
+
+            --text-g1: #ffffff;
+            --text-g2: #e0f7fa;
+            --text-g3: #4dd0e1;
+
+            --hour-active: #00e5ff;    
+            --minute-active: #ffffff;  
+            --second-active: #18ffff;  
+            --cardinal-gold: #b2ebf2;
+
+            --line-color: #cfd8dc;     
+            --light-inactive: rgba(255, 255, 255, 0.03); 
+        }
+
+        /* 7. MASHHAD (Shrine/Deep Red - Burgundy/Gold/Black) */
+        body.theme-mashhad {
+            --bg-body: #0f0005;
+
+            --dial-g1: #880e4f; /* Deep Burgundy/Cochineal */
+            --dial-g2: #4a0020;
+            --dial-g3: #1a0005;
+
+            --bezel-g1: #212121; /* Black Stone */
+            --bezel-g2: #000000;
+            --bezel-g3: #000000;
+            --bezel-rim: #ffb300; /* Heavy Gold Rim */
+            --bezel-text: #ffca28; 
+
+            --hour-glaze-1: #ffc107; /* Gold Glaze */
+            --hour-glaze-2: #ff6f00;
+            --hour-glaze-3: #fff8e1;
+
+            --star-g1: #ffecb3;
+            --star-g2: #ffca28;
+            --star-g3: #ff6f00;
+            --star-g4: #3e2723;
+
+            --text-g1: #fff8e1;
+            --text-g2: #ffe082;
+            --text-g3: #ffb300;
+
+            --hour-active: #ffd740;    
+            --minute-active: #ffab40;  
+            --second-active: #d50000;  /* Blood Red */
+            --cardinal-gold: #ffecb3;
+
+            --line-color: #8d6e63;     
+            --light-inactive: rgba(255, 193, 7, 0.04); 
+        }
+
+        /* --- LAYOUT & BASE STYLES --- */
         body {
             margin: 0;
             padding: 0;
@@ -50,8 +282,48 @@
             height: 100vh;
             overflow: hidden;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.8s ease;
         }
 
+        /* --- THEME SELECTOR UI --- */
+        .theme-control {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .theme-label {
+            color: #888;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-left: 2px;
+        }
+
+        select {
+            background: rgba(0,0,0,0.6);
+            color: #fff;
+            border: 1px solid #444;
+            padding: 10px 15px;
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 14px;
+            border-radius: 4px;
+            outline: none;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+        }
+
+        select:hover {
+            border-color: #888;
+            background: rgba(0,0,0,0.8);
+        }
+
+        /* --- WATCH STYLES --- */
         .watch-container {
             position: relative;
             width: 90vmin;
@@ -59,7 +331,6 @@
             max-width: 600px;
             max-height: 600px;
             border-radius: 50%;
-            /* Updated shadow to account for the wider bezel */
             box-shadow: 
                 0 0 0 2px #1a1a1a,
                 0 0 0 5px #050a14, 
@@ -78,6 +349,7 @@
         #dial-cover {
             fill: url(#mosque-vignette);
             mask: url(#dial-holes-mask); 
+            transition: fill 0.8s ease;
         }
 
         .shape {
@@ -86,7 +358,8 @@
             stroke-width: 0.5px;
             stroke-linejoin: round;
             stroke-linecap: round;
-            opacity: var(--line-opacity);
+            opacity: 0.4;
+            transition: stroke 0.8s ease;
         }
 
         .hour-shape { 
@@ -101,22 +374,25 @@
             stroke-width: 1.2px; 
             opacity: 1; 
             stroke: var(--cardinal-gold); 
+            transition: stroke 0.8s ease;
         }
         
-        .minute-slot-outline { stroke: #3949ab; opacity: 0.5; } 
-        .landmark { stroke: #4dd0e1; stroke-width: 0.8px; opacity: 0.8; } 
-        .backlight-shape { stroke: none; fill: var(--light-inactive); }
+        .minute-slot-outline { stroke: var(--line-color); opacity: 0.5; } 
+        .landmark { stroke: var(--minute-active); stroke-width: 0.8px; opacity: 0.8; } 
+        .backlight-shape { stroke: none; fill: var(--light-inactive); transition: fill 0.8s ease; }
 
         .cursor-group { transform-origin: 0px 0px; }
 
         .hour-cursor-shape {
             fill: var(--hour-active);
             filter: drop-shadow(0 0 5px var(--hour-active)) drop-shadow(0 0 15px var(--hour-active));
+            transition: fill 0.8s ease;
         }
 
         .minute-cursor-shape {
             fill: var(--minute-active);
             filter: drop-shadow(0 0 4px var(--minute-active)) drop-shadow(0 0 10px var(--minute-active));
+            transition: fill 0.8s ease;
         }
 
         .second-cursor-shape {
@@ -124,6 +400,7 @@
             stroke: none;
             filter: drop-shadow(0 0 3px var(--second-active));
             mix-blend-mode: screen;
+            transition: fill 0.8s ease;
         }
 
         /* --- CALLIGRAPHY STYLING --- */
@@ -135,8 +412,8 @@
             text-anchor: middle;
             dominant-baseline: central;
             pointer-events: none;
-            stroke: #000033; 
-            stroke-width: 0.8px;
+            stroke: rgba(0,0,0,0.5); 
+            stroke-width: 0.5px;
             paint-order: stroke fill; 
             filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.8));
         }
@@ -148,9 +425,10 @@
 
         .star-outline {
             fill: none;
-            stroke: #c5a059; 
+            stroke: var(--line-color); 
             stroke-width: 0.5px;
             filter: url(#gear-shadow);
+            transition: stroke 0.8s ease;
         }
 
         .center-bolt {
@@ -161,10 +439,11 @@
 
         .needle-hand {
             fill: var(--cardinal-gold); 
-            stroke: #bcaaa4; 
+            stroke: rgba(0,0,0,0.5); 
             stroke-width: 0.2px; 
             filter: drop-shadow(0 1px 2px rgba(0,0,0,0.8));
             transform-origin: 0 0; 
+            transition: fill 0.8s ease;
         }
 
         .connector-line {
@@ -179,6 +458,7 @@
             stroke: var(--bezel-rim);
             stroke-width: 1px;
             filter: drop-shadow(0 0 5px rgba(0,0,0,0.5));
+            transition: stroke 0.8s ease;
         }
 
         .bezel-text {
@@ -190,55 +470,70 @@
             dominant-baseline: central;
             pointer-events: none;
             filter: drop-shadow(0 1px 1px rgba(0,0,0,0.8));
+            transition: fill 0.8s ease;
         }
 
         .bezel-pip {
             fill: var(--bezel-text);
             stroke: none;
+            transition: fill 0.8s ease;
         }
 
         .bezel-triangle {
-            fill: var(--hour-active); /* Gold triangle at 12 */
+            fill: var(--hour-active); 
             stroke: #000;
             stroke-width: 0.5px;
+            transition: fill 0.8s ease;
         }
 
     </style>
 </head>
 <body>
 
+<div class="theme-control">
+    <span class="theme-label">Palette</span>
+    <select id="theme-selector">
+        <option value="">Isfahan (Haft Rang)</option>
+        <option value="theme-kashan">Kashan (Rug)</option>
+        <option value="theme-yazd">Yazd (Desert)</option>
+        <option value="theme-shiraz">Shiraz (Night)</option>
+        <option value="theme-kerman">Kerman (Pistachio)</option>
+        <option value="theme-qom">Qom (Silk & Mirror)</option>
+        <option value="theme-mashhad">Mashhad (Shrine)</option>
+    </select>
+</div>
+
 <div class="watch-container">
-    <!-- Increased viewBox to accommodate bezel -->
     <svg viewBox="-120 -120 240 240" id="watchFace">
         <defs>
             <radialGradient id="mosque-vignette" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-                <stop offset="0%" style="stop-color:var(--dial-gradient-inner); stop-opacity:1" />
-                <stop offset="60%" style="stop-color:var(--dial-gradient-mid); stop-opacity:1" />
-                <stop offset="100%" style="stop-color:var(--dial-gradient-outer); stop-opacity:1" />
+                <stop offset="0%" style="stop-color:var(--dial-g1); stop-opacity:1" />
+                <stop offset="60%" style="stop-color:var(--dial-g2); stop-opacity:1" />
+                <stop offset="100%" style="stop-color:var(--dial-g3); stop-opacity:1" />
             </radialGradient>
             
             <radialGradient id="hour-lens-grad" cx="30%" cy="30%" r="80%" fx="30%" fy="30%">
                 <stop offset="0%" style="stop-color:rgba(255,255,255,0.15); stop-opacity:1" />
-                <stop offset="100%" style="stop-color:rgba(0,5,15,0.6); stop-opacity:1" />
+                <stop offset="100%" style="stop-color:rgba(0,0,0,0.6); stop-opacity:1" />
             </radialGradient>
 
             <linearGradient id="ceramic-glaze" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" style="stop-color:#4dd0e1; stop-opacity:1" /> 
-                <stop offset="50%" style="stop-color:#1a237e; stop-opacity:1" /> 
-                <stop offset="100%" style="stop-color:#ffd700; stop-opacity:1" /> 
+                <stop offset="0%" style="stop-color:var(--hour-glaze-1); stop-opacity:1" /> 
+                <stop offset="50%" style="stop-color:var(--hour-glaze-2); stop-opacity:1" /> 
+                <stop offset="100%" style="stop-color:var(--hour-glaze-3); stop-opacity:1" /> 
             </linearGradient>
 
             <radialGradient id="persian-dome-ceramic" cx="30%" cy="30%" r="80%" fx="25%" fy="25%">
-                <stop offset="0%" stop-color="#80deea" /> 
-                <stop offset="40%" stop-color="#0097a7" /> 
-                <stop offset="80%" stop-color="#006064" /> 
-                <stop offset="100%" stop-color="#000" /> 
+                <stop offset="0%" style="stop-color:var(--star-g1)" /> 
+                <stop offset="40%" style="stop-color:var(--star-g2)" /> 
+                <stop offset="80%" style="stop-color:var(--star-g3)" /> 
+                <stop offset="100%" style="stop-color:var(--star-g4)" /> 
             </radialGradient>
 
             <linearGradient id="aged-gold-text" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stop-color="#fff9c4" />
-                <stop offset="50%" stop-color="#ffca28" />
-                <stop offset="100%" stop-color="#ff6f00" />
+                <stop offset="0%" style="stop-color:var(--text-g1)" />
+                <stop offset="50%" style="stop-color:var(--text-g2)" />
+                <stop offset="100%" style="stop-color:var(--text-g3)" />
             </linearGradient>
 
             <radialGradient id="bolt-head" cx="50%" cy="50%" r="50%" fx="30%" fy="30%">
@@ -248,15 +543,14 @@
             </radialGradient>
 
             <linearGradient id="connector-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#c5a059" />
-                <stop offset="100%" stop-color="#ffe082" />
+                <stop offset="0%" style="stop-color:var(--line-color)" />
+                <stop offset="100%" style="stop-color:var(--cardinal-gold)" />
             </linearGradient>
 
-            <!-- Bezel Gradient: Ceramic look -->
             <linearGradient id="bezel-ceramic-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#00695c" />
-                <stop offset="50%" stop-color="#004d40" />
-                <stop offset="100%" stop-color="#00251a" />
+                <stop offset="0%" style="stop-color:var(--bezel-g1)" />
+                <stop offset="50%" style="stop-color:var(--bezel-g2)" />
+                <stop offset="100%" style="stop-color:var(--bezel-g3)" />
             </linearGradient>
 
             <filter id="rim-shadow" x="-50%" y="-50%" width="200%" height="200%">
@@ -281,11 +575,8 @@
             </mask>
         </defs>
 
-        <!-- LAYER 0: Bezel (Behind dial elements or around them) -->
-        <!-- Bezel Ring Background -->
+        <!-- LAYER 0: Bezel -->
         <path id="bezel-bg" class="bezel-ring" d="M 0 0 m -115 0 a 115 115 0 1 0 230 0 a 115 115 0 1 0 -230 0 M 0 0 m -98 0 a 98 98 0 1 1 196 0 a 98 98 0 1 1 -196 0" fill-rule="evenodd" />
-        
-        <!-- Bezel Markings Group -->
         <g id="bezel-marks-group"></g>
 
         <!-- LAYER 1: Background Grid -->
@@ -344,22 +635,20 @@
     const minuteCursorGroup = document.getElementById('minute-cursor-group');
     const hourCursorGroup = document.getElementById('hour-cursor-group');
 
+    const themeSelector = document.getElementById('theme-selector');
+
     const OUTER_RING_CONFIG = { r1: 70, r2: 82, r3: 94, widthAngle: 2.2, roundness: 0.2 };
     const HOUR_RING_CONFIG = { r1: 25, r2: 48, r3: 65, angleSpread: 12, roundness: 0.15 };
     const STAR_CONFIG = { outerRadius: 18, innerRadius: 8 };
-    const BEZEL_CONFIG = { radius: 106 }; // Radius for bezel text
+    const BEZEL_CONFIG = { radius: 106 };
 
     const CARDINAL_NUMERALS = { 0: "١٢", 3: "٣", 6: "٦", 9: "٩" };
-    
-    // Arabic numerals for 10, 20, 30, 40, 50, 60
-    const BEZEL_NUMERALS = {
-        0: "", // 60 is usually a triangle or pip
-        10: "١٠",
-        20: "٢٠",
-        30: "٣٠",
-        40: "٤٠",
-        50: "٥٠"
-    };
+    const BEZEL_NUMERALS = { 0: "", 10: "١٠", 20: "٢٠", 30: "٣٠", 40: "٤٠", 50: "٥٠" };
+
+    // --- THEME SWITCHER LOGIC ---
+    themeSelector.addEventListener('change', (e) => {
+        document.body.className = e.target.value;
+    });
 
     function createPath(d, className, id) {
         const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
@@ -481,12 +770,15 @@
             grad.setAttribute("y1", startP.y);
             grad.setAttribute("x2", endP.x);
             grad.setAttribute("y2", endP.y);
+            
             const stop1 = document.createElementNS("http://www.w3.org/2000/svg", "stop");
             stop1.setAttribute("offset", "0%");
-            stop1.setAttribute("stop-color", "#c5a059"); 
+            stop1.style.stopColor = "var(--line-color)";
+            
             const stop2 = document.createElementNS("http://www.w3.org/2000/svg", "stop");
             stop2.setAttribute("offset", "100%");
-            stop2.setAttribute("stop-color", "#ffe082"); 
+            stop2.style.stopColor = "var(--cardinal-gold)";
+            
             grad.appendChild(stop1);
             grad.appendChild(stop2);
             document.querySelector("defs").appendChild(grad);
@@ -499,7 +791,6 @@
     function drawBezel() {
         for (let i = 0; i < 60; i++) {
             const angle = i * 6;
-            // Simple pips for minutes
             if (i % 10 !== 0) {
                 const pipPos = polarToCartesian(BEZEL_CONFIG.radius, angle);
                 const pip = document.createElementNS("http://www.w3.org/2000/svg", "circle");
@@ -509,9 +800,7 @@
                 pip.setAttribute("class", "bezel-pip");
                 bezelMarksGroup.appendChild(pip);
             } else {
-                // 10 minute markers
                 if (i === 0) {
-                    // 12 o'clock triangle
                     const triR = BEZEL_CONFIG.radius;
                     const t1 = polarToCartesian(triR - 4, 0);
                     const t2 = polarToCartesian(triR + 4, -3);
@@ -519,13 +808,8 @@
                     const d = `M ${t1.x} ${t1.y} L ${t2.x} ${t2.y} L ${t3.x} ${t3.y} Z`;
                     bezelMarksGroup.appendChild(createPath(d, "bezel-triangle"));
                 } else {
-                    // Text
                     const txtPos = polarToCartesian(BEZEL_CONFIG.radius, angle);
                     const txt = createText(BEZEL_NUMERALS[i], txtPos.x, txtPos.y, "bezel-text", true);
-                    // Rotate text to be upright relative to center or follow curve? 
-                    // Diver watches usually rotate text to follow curve (bottoms toward center).
-                    // The createText function rotates 90deg + translates. 
-                    // We want the text to rotate with the angle.
                     txt.setAttribute("transform", `rotate(${angle + 90}, ${txtPos.x}, ${txtPos.y})`);
                     bezelMarksGroup.appendChild(txt);
                 }
@@ -581,7 +865,7 @@
     defineCenterStar();
     drawStaticGrid();
     drawConnectors();
-    drawBezel(); // New function call
+    drawBezel();
     createCursors();
 
     function updateClock() {
