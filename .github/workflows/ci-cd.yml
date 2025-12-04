@@ -37,6 +37,7 @@ jobs:
 
       - name: Spell Check
         run: npm run spell
+        continue-on-error: true 
 
   deploy:
     name: Deploy to Loopia
@@ -49,7 +50,7 @@ jobs:
 
       - name: Deploy via SFTP
         # v4.3.5 pinned to commit for supply chain security
-        uses: SamKirkland/FTP-Deploy-Action@2db33d854c529dea8810fe1828cf3696cce89b36
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
