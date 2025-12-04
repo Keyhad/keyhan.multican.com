@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Persian Watch - Adjusted Layout</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rakkas&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- THEME DEFINITIONS --- */
+        :root {
+            --bg-body: #010205;
+            --dial-g1: #1a237e; --dial-g2: #0d1333; --dial-g3: #000000;
+            --bezel-g1: #00695c; --bezel-g2: #004d40; --bezel-g3: #00251a;
+            --bezel-rim: #4e342e; --bezel-text: #fffde7;
+            --hour-glaze-1: #4dd0e1; --hour-glaze-2: #1a237e; --hour-glaze-3: #ffd700;
+            --hour-active: #ffc107; 
+            --minute-active: #26c6da; 
+            --second-active: #ff6f00;
+            --cardinal-gold: #ffe082; --line-color: #c5a059; --light-inactive: rgba(38, 198, 218, 0.03);
+            --text-fill: #fff9c4;
+        }
+
+        body.theme-kashan {
+            --bg-body: #0a0000;
+            --dial-g1: #68000d; --dial-g2: #3e0008; --dial-g3: #1a0002;
+            --bezel-g1: #1a237e; --bezel-g2: #0d1333; --bezel-g3: #000011;
+            --bezel-rim: #8d6e63; --bezel-text: #fff8e1;
+            --hour-glaze-1: #ff8a80; --hour-glaze-2: #b71c1c; --hour-glaze-3: #ffcdd2;
+            --hour-active: #ff1744; 
+            --minute-active: #fff59d; --second-active: #ff1744;
+            --cardinal-gold: #ffccbc; --line-color: #d7ccc8; --light-inactive: rgba(255, 205, 210, 0.05);
+            --text-fill: #ffffff;
+        }
+
+        body.theme-yazd {
+            --bg-body: #1a1510;
+            --dial-g1: #8d6e63; --dial-g2: #5d4037; --dial-g3: #3e2723;
+            --bezel-g1: #a1887f; --bezel-g2: #795548; --bezel-g3: #4e342e;
+            --bezel-rim: #3e2723; --bezel-text: #e0f7fa;
+            --hour-glaze-1: #00bcd4; --hour-glaze-2: #006064; --hour-glaze-3: #e0f7fa;
+            --hour-active: #00e5ff; 
+            --minute-active: #ffcc80; --second-active: #ff6e40;
+            --cardinal-gold: #4dd0e1; --line-color: #bcaaa4; --light-inactive: rgba(77, 208, 225, 0.05);
+            --text-fill: #fff3e0;
+        }
+
+        body.theme-shiraz {
+            --bg-body: #020005;
+            --dial-g1: #004d40; --dial-g2: #00251a; --dial-g3: #000000;
+            --bezel-g1: #5d4037; --bezel-g2: #3e2723; --bezel-g3: #1b0000;
+            --bezel-rim: #d7ccc8; --bezel-text: #e0f2f1;
+            --hour-glaze-1: #26a69a; --hour-glaze-2: #004d40; --hour-glaze-3: #80cbc4;
+            --hour-active: #00e676; 
+            --minute-active: #ffab91; --second-active: #ff6e40;
+            --cardinal-gold: #b2dfdb; --line-color: #4db6ac; --light-inactive: rgba(38, 166, 154, 0.05);
+            --text-fill: #ffffff;
+        }
+
+        body.theme-kerman {
+            --bg-body: #0f140a;
+            --dial-g1: #33691e; --dial-g2: #1b5e20; --dial-g3: #051002;
+            --bezel-g1: #558b2f; --bezel-g2: #33691e; --bezel-g3: #1b5e20;
+            --bezel-rim: #8d6e63; --bezel-text: #f1f8e9;
+            --hour-glaze-1: #f48fb1; --hour-glaze-2: #ad1457; --hour-glaze-3: #fce4ec;
+            --hour-active: #ff4081; 
+            --minute-active: #cddc39; --second-active: #e91e63;
+            --cardinal-gold: #f8bbd0; --line-color: #a5d6a7; --light-inactive: rgba(244, 143, 177, 0.05);
+            --text-fill: #fffde7;
+        }
+
+        body.theme-qom {
+            --bg-body: #000505;
+            --dial-g1: #37474f; --dial-g2: #263238; --dial-g3: #000000;
+            --bezel-g1: #b0bec5; --bezel-g2: #78909c; --bezel-g3: #455a64;
+            --bezel-rim: #eceff1; --bezel-text: #000000;
+            --hour-glaze-1: #80deea; --hour-glaze-2: #006064; --hour-glaze-3: #e0f7fa;
+            --hour-active: #ffffff; 
+            --minute-active: #ffffff; --second-active: #18ffff;
+            --cardinal-gold: #b2ebf2; --line-color: #cfd8dc; --light-inactive: rgba(255, 255, 255, 0.03);
+            --text-fill: #ffffff;
+        }
+
+        body.theme-mashhad {
+            --bg-body: #0f0005;
+            --dial-g1: #880e4f; --dial-g2: #4a0020; --dial-g3: #1a0005;
+            --bezel-g1: #212121; --bezel-g2: #000000; --bezel-g3: #000000;
+            --bezel-rim: #ffb300; --bezel-text: #ffca28;
+            --hour-glaze-1: #ffc107; --hour-glaze-2: #ff6f00; --hour-glaze-3: #fff8e1;
+            --hour-active: #ffeb3b; 
+            --minute-active: #ffab40; --second-active: #d50000;
+            --cardinal-gold: #ffecb3; --line-color: #8d6e63; --light-inactive: rgba(255, 193, 7, 0.04);
+            --text-fill: #fff8e1;
+        }
+
+        /* --- BASE STYLES --- */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-body);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.8s ease;
+        }
+
+        .theme-control {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .theme-label {
+            color: #888;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-left: 2px;
+        }
+
+        select {
+            background: rgba(0,0,0,0.6);
+            color: #fff;
+            border: 1px solid #444;
+            padding: 10px 15px;
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 14px;
+            border-radius: 4px;
+            outline: none;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+        }
+
+        .watch-container {
+            position: relative;
+            width: 90vmin;
+            height: 90vmin;
+            max-width: 600px;
+            max-height: 600px;
+            border-radius: 50%;
+            box-shadow: 
+                0 0 0 2px #1a1a1a,
+                0 0 0 5px #050a14, 
+                0 20px 50px rgba(0,0,0,1),
+                inset 0 0 80px rgba(0,0,0,1);
+            background: #000;
+            overflow: hidden;
+        }
+
+        svg {
+            width: 100%;
+            height: 100%;
+            transform: rotate(-90deg); 
+        }
+
+        #dial-cover {
+            fill: url(#mosque-vignette);
+            mask: url(#dial-holes-mask); 
+            transition: fill 0.8s ease;
+        }
+
+        .shape {
+            fill: none; 
+            stroke: var(--line-color);
+            stroke-width: 0.5px;
+            stroke-linejoin: round;
+            stroke-linecap: round;
+            opacity: 0.4;
+            transition: stroke 0.8s ease;
+        }
+
+        .hour-shape { 
+            stroke-width: 0.8px; 
+            stroke: url(#ceramic-glaze); 
+            fill: none;   
+            filter: url(#rim-shadow);     
+            opacity: 1;
+        }
+
+        .hour-cardinal { 
+            stroke-width: 1.2px; 
+            opacity: 1; 
+            stroke: var(--cardinal-gold); 
+            transition: stroke 0.8s ease;
+        }
+        
+        .minute-slot-outline { stroke: var(--line-color); opacity: 0.5; } 
+        .landmark { stroke: var(--minute-active); stroke-width: 0.8px; opacity: 0.8; } 
+        .backlight-shape { stroke: none; fill: var(--light-inactive); transition: fill 0.8s ease; }
+
+        .cursor-group { transform-origin: 0px 0px; }
+
+        /* --- LAMP STYLING --- */
+        .hour-cursor-shape {
+            fill: url(#lamp-gradient);
+            stroke: #ffffff; 
+            stroke-width: 1.5px; 
+            mix-blend-mode: normal; 
+            filter: 
+                drop-shadow(0 0 5px var(--hour-active)) 
+                drop-shadow(0 0 15px var(--hour-active));
+            opacity: 1;
+            transition: filter 0.8s ease;
+        }
+
+        .minute-cursor-shape {
+            fill: var(--minute-active);
+            filter: drop-shadow(0 0 4px var(--minute-active));
+            mix-blend-mode: screen; 
+            transition: fill 0.8s ease;
+        }
+
+        .second-cursor-shape {
+            fill: var(--second-active); 
+            stroke: none;
+            filter: drop-shadow(0 0 3px var(--second-active));
+            mix-blend-mode: screen;
+            transition: fill 0.8s ease;
+        }
+
+        .numeral-text {
+            fill: var(--text-fill); 
+            font-family: 'Rakkas', serif; 
+            font-weight: 400;
+            font-size: 18px; 
+            text-anchor: middle;
+            dominant-baseline: central;
+            pointer-events: none;
+            stroke: #000000; 
+            stroke-width: 1.2px;
+            paint-order: stroke fill; 
+            filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.9));
+            transition: fill 0.8s ease;
+        }
+        
+        .metal-texture-fill {
+            fill: url(#persian-dome-ceramic); 
+            pointer-events: none;
+        }
+
+        .star-outline {
+            fill: none;
+            stroke: var(--line-color); 
+            stroke-width: 0.5px;
+            filter: url(#gear-shadow);
+            transition: stroke 0.8s ease;
+        }
+
+        .center-bolt {
+            fill: url(#bolt-head);
+            stroke: #8a6e3e; 
+            stroke-width: 1px;
+        }
+
+        .needle-hand {
+            fill: var(--cardinal-gold); 
+            stroke: rgba(0,0,0,0.5); 
+            stroke-width: 0.2px; 
+            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.8));
+            transform-origin: 0 0; 
+            transition: fill 0.8s ease;
+        }
+
+        .connector-line {
+            fill: none;
+            stroke: url(#connector-grad);
+            stroke-linecap: butt;
+        }
+
+        .bezel-ring {
+            fill: url(#bezel-ceramic-grad);
+            stroke: var(--bezel-rim);
+            stroke-width: 1px;
+            filter: drop-shadow(0 0 5px rgba(0,0,0,0.5));
+            transition: stroke 0.8s ease;
+        }
+
+        .bezel-text {
+            fill: var(--bezel-text);
+            font-family: 'Rakkas', serif; 
+            font-weight: 400;
+            font-size: 14px;
+            text-anchor: middle;
+            dominant-baseline: central;
+            pointer-events: none;
+            filter: drop-shadow(0 1px 1px rgba(0,0,0,0.8));
+            transition: fill 0.8s ease;
+        }
+
+        .bezel-pip {
+            fill: var(--bezel-text);
+            stroke: none;
+            transition: fill 0.8s ease;
+        }
+
+        .bezel-triangle {
+            fill: var(--hour-active); 
+            stroke: #000;
+            stroke-width: 0.5px;
+            transition: fill 0.8s ease;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="theme-control">
+    <span class="theme-label">Medallion Style</span>
+    <select id="theme-selector">
+        <option value="">Isfahan (Rosette)</option>
+        <option value="theme-kashan">Kashan (Ogive)</option>
+        <option value="theme-yazd">Yazd (Octagram)</option>
+        <option value="theme-shiraz">Shiraz (Hafez Mosaic)</option>
+        <option value="theme-kerman">Kerman (Sunburst)</option>
+        <option value="theme-qom">Qom (Silk Star)</option>
+        <option value="theme-mashhad">Mashhad (Shrine Dome)</option>
+    </select>
+</div>
+
+<div class="watch-container">
+    <svg viewBox="-120 -120 240 240" id="watchFace">
+        <defs>
+            <radialGradient id="mosque-vignette" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+                <stop offset="0%" style="stop-color:var(--dial-g1); stop-opacity:1" />
+                <stop offset="60%" style="stop-color:var(--dial-g2); stop-opacity:1" />
+                <stop offset="100%" style="stop-color:var(--dial-g3); stop-opacity:1" />
+            </radialGradient>
+            
+            <radialGradient id="lamp-gradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+                <stop offset="0%" style="stop-color:#ffffff; stop-opacity:1" />
+                <stop offset="30%" style="stop-color:#ffffff; stop-opacity:0.9" />
+                <stop offset="100%" style="stop-color:var(--hour-active); stop-opacity:1" />
+            </radialGradient>
+
+            <linearGradient id="ceramic-glaze" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:var(--hour-glaze-1); stop-opacity:1" /> 
+                <stop offset="50%" style="stop-color:var(--hour-glaze-2); stop-opacity:1" /> 
+                <stop offset="100%" style="stop-color:var(--hour-glaze-3); stop-opacity:1" /> 
+            </linearGradient>
+
+            <radialGradient id="persian-dome-ceramic" cx="30%" cy="30%" r="80%" fx="25%" fy="25%">
+                <stop offset="0%" style="stop-color:var(--star-g1)" /> 
+                <stop offset="40%" style="stop-color:var(--star-g2)" /> 
+                <stop offset="80%" style="stop-color:var(--star-g3)" /> 
+                <stop offset="100%" style="stop-color:var(--star-g4)" /> 
+            </radialGradient>
+
+            <radialGradient id="bolt-head" cx="50%" cy="50%" r="50%" fx="30%" fy="30%">
+                <stop offset="0%" stop-color="#fff" />
+                <stop offset="40%" stop-color="#fbc02d" />
+                <stop offset="100%" stop-color="#5d4037" />
+            </radialGradient>
+
+            <linearGradient id="connector-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:var(--line-color)" />
+                <stop offset="100%" style="stop-color:var(--cardinal-gold)" />
+            </linearGradient>
+
+            <linearGradient id="bezel-ceramic-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:var(--bezel-g1)" />
+                <stop offset="50%" style="stop-color:var(--bezel-g2)" />
+                <stop offset="100%" style="stop-color:var(--bezel-g3)" />
+            </linearGradient>
+
+            <filter id="rim-shadow" x="-50%" y="-50%" width="200%" height="200%">
+                <feDropShadow dx="0.5" dy="1" stdDeviation="1" flood-color="#000" flood-opacity="0.8"/>
+            </filter>
+
+            <filter id="gear-shadow" x="-50%" y="-50%" width="200%" height="200%">
+                <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000" flood-opacity="0.9"/>
+            </filter>
+
+            <mask id="dial-holes-mask">
+                <rect x="-150" y="-150" width="300" height="300" fill="white" />
+                <g id="mask-holes-group" fill="black"></g>
+            </mask>
+
+            <path id="star-geom-def" />
+            <path id="needle-geom-def" d="M -2 0 Q 8 1.7 16 0 Q 8 -1.7 -2 0 Z" />
+
+            <mask id="static-star-mask">
+                <rect x="-50" y="-50" width="100" height="100" fill="black" />
+                <use href="#star-geom-def" fill="white" />
+            </mask>
+        </defs>
+
+        <!-- LAYER 0: Bezel -->
+        <path id="bezel-bg" class="bezel-ring" d="M 0 0 m -115 0 a 115 115 0 1 0 230 0 a 115 115 0 1 0 -230 0 M 0 0 m -98 0 a 98 98 0 1 1 196 0 a 98 98 0 1 1 -196 0" fill-rule="evenodd" />
+        <g id="bezel-marks-group"></g>
+
+        <!-- LAYER 1: Background Grid -->
+        <g id="static-grid-group"></g>
+
+        <!-- LAYER 2: Cursors (Lights) -->
+        <g id="hour-cursor-group" class="cursor-group"></g>
+        <g id="minute-cursor-group" class="cursor-group"></g>
+        <g id="second-cursor-group" class="cursor-group"></g>
+
+        <!-- LAYER 3: Dial Cover (The Vignette) -->
+        <circle id="dial-cover" cx="0" cy="0" r="100"></circle>
+
+        <!-- LAYER 4: Connectors -->
+        <g id="connector-group"></g>
+
+        <!-- LAYER 5: Rings -->
+        <g id="hour-ring"></g>
+        <g id="minute-ring-outlines"></g>
+        
+        <!-- LAYER 6: The Rotating Medallion -->
+        <rect x="-30" y="-30" width="60" height="60" 
+              class="metal-texture-fill" 
+              mask="url(#static-star-mask)" />
+        
+        <use href="#star-geom-def" class="star-outline" />
+
+        <!-- LAYER 7: The Rotating Needle -->
+        <g id="needle-rotator">
+            <use href="#needle-geom-def" class="needle-hand" />
+        </g>
+        
+        <!-- LAYER 8: Numerals (MOVED TO TOP FOR VISIBILITY) -->
+        <g id="numerals-group"></g>
+
+        <!-- Center Bolt -->
+        <circle cx="0" cy="0" r="4" class="center-bolt" />
+
+    </svg>
+</div>
+
+<script>
+    const maskHolesGroup = document.getElementById('mask-holes-group');
+    const staticGridGroup = document.getElementById('static-grid-group');
+    const numeralsGroup = document.getElementById('numerals-group');
+    const bezelMarksGroup = document.getElementById('bezel-marks-group');
+    
+    const hourRingGroup = document.getElementById('hour-ring');
+    const minuteOutlineGroup = document.getElementById('minute-ring-outlines');
+    const connectorGroup = document.getElementById('connector-group');
+    
+    const starGeomDef = document.getElementById('star-geom-def');
+    const needleRotator = document.getElementById('needle-rotator');
+
+    const secondCursorGroup = document.getElementById('second-cursor-group');
+    const minuteCursorGroup = document.getElementById('minute-cursor-group');
+    const hourCursorGroup = document.getElementById('hour-cursor-group');
+
+    const themeSelector = document.getElementById('theme-selector');
+
+    const BEZEL_CONFIG = { radius: 106 };
+
+    const CARDINAL_NUMERALS = { 0: "١٢", 3: "٣", 6: "٦", 9: "٩" };
+    const BEZEL_NUMERALS = { 0: "", 10: "١٠", 20: "٢٠", 30: "٣٠", 40: "٤٠", 50: "٥٠" };
+
+    // --- GEOMETRY HELPERS ---
+    function polarToCartesian(radius, angleInDegrees) {
+        const angleInRadians = (angleInDegrees) * Math.PI / 180.0;
+        return {
+            x: (radius * Math.cos(angleInRadians)),
+            y: (radius * Math.sin(angleInRadians))
+        };
+    }
+
+    // --- RUG PATTERN GENERATORS ---
+
+    // 1. Shah Abbasi Palmette (Lotus) for Hour Markers
+    // UPDATED: Elongated to fill the center better (Radius 28 -> 78)
+    function getPalmettePathData(angle) {
+        const rBase = 28;
+        const rWaist = 42;      // Pushed out
+        const rShoulder = 62;   // Pushed out (Widest point)
+        const rTip = 78;        // Extended tip
+
+        const widthBase = 4; 
+        const widthWaist = 2; 
+        const widthShoulder = 12;
+
+        // Points
+        const pBaseL = polarToCartesian(rBase, angle - widthBase);
+        const pBaseR = polarToCartesian(rBase, angle + widthBase);
+        
+        const pWaistL = polarToCartesian(rWaist, angle - widthWaist);
+        const pWaistR = polarToCartesian(rWaist, angle + widthWaist);
+        
+        const pShoulderL = polarToCartesian(rShoulder, angle - widthShoulder);
+        const pShoulderR = polarToCartesian(rShoulder, angle + widthShoulder);
+        
+        const pTip = polarToCartesian(rTip, angle);
+
+        return `M ${pBaseL.x} ${pBaseL.y}
+                Q ${polarToCartesian(rBase+5, angle-widthBase-2).x} ${polarToCartesian(rBase+5, angle-widthBase-2).y} ${pWaistL.x} ${pWaistL.y}
+                Q ${polarToCartesian(rWaist+10, angle-widthShoulder-2).x} ${polarToCartesian(rWaist+10, angle-widthShoulder-2).y} ${pShoulderL.x} ${pShoulderL.y}
+                Q ${polarToCartesian(rShoulder+5, angle-widthShoulder).x} ${polarToCartesian(rShoulder+5, angle-widthShoulder).y} ${pTip.x} ${pTip.y}
+                Q ${polarToCartesian(rShoulder+5, angle+widthShoulder).x} ${polarToCartesian(rShoulder+5, angle+widthShoulder).y} ${pShoulderR.x} ${pShoulderR.y}
+                Q ${polarToCartesian(rWaist+10, angle+widthShoulder+2).x} ${polarToCartesian(rWaist+10, angle+widthShoulder+2).y} ${pWaistR.x} ${pWaistR.y}
+                Q ${polarToCartesian(rBase+5, angle+widthBase+2).x} ${polarToCartesian(rBase+5, angle+widthBase+2).y} ${pBaseR.x} ${pBaseR.y}
+                Z`;
+    }
+
+    // 2. Border Crenellation (Arch/Seed) for Minute Markers
+    // UPDATED: Pushed outward to reduce gap with bezel (Radius 84 -> 98)
+    function getBorderMotifPathData(angle) {
+        const rInner = 84; // Moved from 75
+        const rOuter = 98; // Moved from 85 (Close to bezel at 106)
+        const width = 2.0; 
+
+        const pInnerL = polarToCartesian(rInner, angle - width);
+        const pInnerR = polarToCartesian(rInner, angle + width);
+        const pTip = polarToCartesian(rOuter, angle);
+        
+        return `M ${pInnerL.x} ${pInnerL.y}
+                Q ${polarToCartesian(rInner+5, angle-width-1).x} ${polarToCartesian(rInner+5, angle-width-1).y} ${pTip.x} ${pTip.y}
+                Q ${polarToCartesian(rInner+5, angle+width+1).x} ${polarToCartesian(rInner+5, angle+width+1).y} ${pInnerR.x} ${pInnerR.y}
+                Z`;
+    }
+
+    // --- MEDALLION GENERATORS (Center Piece) ---
+    function generateStar(points, rOuter, rInner, roundness) {
+        const vertices = [];
+        for (let i = 0; i < points * 2; i++) {
+            let r = (i % 2 === 0) ? rOuter : rInner;
+            let angle = i * (360 / (points * 2));
+            vertices.push(polarToCartesian(r, angle));
+        }
+        const lerp = (p1, p2, t) => ({ x: p1.x + (p2.x - p1.x) * t, y: p1.y + (p2.y - p1.y) * t });
+        let d = "";
+        const len = vertices.length;
+        const startPoint = lerp(vertices[len - 1], vertices[0], 0.5);
+        d += `M ${startPoint.x} ${startPoint.y} `;
+        for (let i = 0; i < len; i++) {
+            const current = vertices[i];
+            const next = vertices[(i + 1) % len];
+            const prev = vertices[(i - 1 + len) % len];
+            const pEndCurve = lerp(current, next, roundness);
+            const pStartCurve = lerp(prev, current, 1 - roundness);
+            d += `L ${pStartCurve.x} ${pStartCurve.y} `;
+            d += `Q ${current.x} ${current.y} ${pEndCurve.x} ${pEndCurve.y} `;
+        }
+        d += "Z"; 
+        return d;
+    }
+
+    function generateRosette(lobes, rOuter, rInner) {
+        let d = "";
+        for (let i = 0; i < lobes; i++) {
+            const angleStart = i * (360 / lobes);
+            const angleEnd = (i + 1) * (360 / lobes);
+            const angleMid = angleStart + (360 / lobes) / 2;
+            
+            const pStart = polarToCartesian(rInner, angleStart);
+            const pMid = polarToCartesian(rOuter, angleMid);
+            const pEnd = polarToCartesian(rInner, angleEnd);
+
+            if (i === 0) d += `M ${pStart.x} ${pStart.y} `;
+            d += `Q ${polarToCartesian(rOuter*0.8, angleStart + 5).x} ${polarToCartesian(rOuter*0.8, angleStart + 5).y} ${pMid.x} ${pMid.y} `;
+            d += `Q ${polarToCartesian(rOuter*0.8, angleEnd - 5).x} ${polarToCartesian(rOuter*0.8, angleEnd - 5).y} ${pEnd.x} ${pEnd.y} `;
+        }
+        d += "Z";
+        return d;
+    }
+
+    function generateOgive() {
+        return `M 0 -22 C 12 -15 18 -8 18 0 C 18 8 12 15 0 22 C -12 15 -18 8 -18 0 C -18 -8 -12 -15 0 -22 Z`;
+    }
+
+    function generateHafezMosaic() {
+        const points = 16;
+        const rOuter = 23;
+        const rInner = 8;
+        let d = "";
+        for (let i = 0; i < points * 2; i++) {
+            const isOuter = i % 2 === 0;
+            const r = isOuter ? rOuter : rInner;
+            const angle = i * (360 / (points * 2));
+            const p = polarToCartesian(r, angle);
+            
+            if (i === 0) d += `M ${p.x} ${p.y} `;
+            else {
+                if (isOuter) {
+                    d += `L ${p.x} ${p.y} `;
+                } else {
+                    const cpAngle = angle - (360/(points*2))/2;
+                    const cp = polarToCartesian(r + 2, cpAngle); 
+                    d += `Q ${cp.x} ${cp.y} ${p.x} ${p.y} `;
+                }
+            }
+        }
+        d += "Z";
+        return d;
+    }
+
+    function updateMedallion(theme) {
+        let d = "";
+        switch(theme) {
+            case 'theme-kashan': d = generateOgive(); break;
+            case 'theme-yazd': d = generateStar(8, 20, 12, 0.1); break; 
+            case 'theme-shiraz': d = generateHafezMosaic(); break; 
+            case 'theme-kerman': d = generateRosette(12, 22, 8); break; 
+            case 'theme-qom': d = generateStar(16, 21, 15, 0.05); break; 
+            case 'theme-mashhad': d = generateRosette(16, 20, 16); break; 
+            default: d = generateRosette(8, 20, 10); break; 
+        }
+        starGeomDef.setAttribute("d", d);
+    }
+
+    themeSelector.addEventListener('change', (e) => {
+        const val = e.target.value;
+        document.body.className = val;
+        updateMedallion(val);
+    });
+
+    function createPath(d, className, id) {
+        const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        path.setAttribute("d", d);
+        if (className) path.setAttribute("class", className);
+        if (id) path.setAttribute("id", id);
+        return path;
+    }
+
+    function createText(text, x, y, className, rotate = true) {
+        const t = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        t.setAttribute("x", x);
+        t.setAttribute("y", y);
+        t.textContent = text;
+        if (className) t.setAttribute("class", className);
+        if (rotate) {
+            t.setAttribute("transform", `rotate(90, ${x}, ${y}) translate(0, 1)`);
+        }
+        return t;
+    }
+
+    function drawConnectors() {
+        const cardinals = [0, 90, 180, 270];
+        cardinals.forEach(angle => {
+            const startP = polarToCartesian(20, angle); 
+            const endP = polarToCartesian(28, angle); // Connect to base of palmette
+            const angleRad = angle * Math.PI / 180;
+            const perpAngle = angleRad + Math.PI / 2;
+            const startHalfWidth = 0.5 / 2;
+            const endHalfWidth = 1.2 / 2;
+            const sx = Math.cos(perpAngle);
+            const sy = Math.sin(perpAngle);
+            const p1 = { x: startP.x + sx * startHalfWidth, y: startP.y + sy * startHalfWidth };
+            const p2 = { x: endP.x + sx * endHalfWidth, y: endP.y + sy * endHalfWidth };
+            const p3 = { x: endP.x - sx * endHalfWidth, y: endP.y - sy * endHalfWidth };
+            const p4 = { x: startP.x - sx * startHalfWidth, y: startP.y - sy * startHalfWidth };
+            const d = `M ${p1.x} ${p1.y} L ${p2.x} ${p2.y} L ${p3.x} ${p3.y} L ${p4.x} ${p4.y} Z`;
+            const path = createPath(d, "connector-line");
+            
+            const gradId = `conn-grad-${angle}`;
+            const grad = document.createElementNS("http://www.w3.org/2000/svg", "linearGradient");
+            grad.setAttribute("id", gradId);
+            grad.setAttribute("gradientUnits", "userSpaceOnUse");
+            grad.setAttribute("x1", startP.x);
+            grad.setAttribute("y1", startP.y);
+            grad.setAttribute("x2", endP.x);
+            grad.setAttribute("y2", endP.y);
+            
+            const stop1 = document.createElementNS("http://www.w3.org/2000/svg", "stop");
+            stop1.setAttribute("offset", "0%");
+            stop1.style.stopColor = "var(--line-color)";
+            
+            const stop2 = document.createElementNS("http://www.w3.org/2000/svg", "stop");
+            stop2.setAttribute("offset", "100%");
+            stop2.style.stopColor = "var(--cardinal-gold)";
+            
+            grad.appendChild(stop1);
+            grad.appendChild(stop2);
+            document.querySelector("defs").appendChild(grad);
+            path.style.fill = `url(#${gradId})`;
+
+            connectorGroup.appendChild(path);
+        });
+    }
+
+    function drawBezel() {
+        for (let i = 0; i < 60; i++) {
+            const angle = i * 6;
+            if (i % 10 !== 0) {
+                const pipPos = polarToCartesian(BEZEL_CONFIG.radius, angle);
+                const pip = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+                pip.setAttribute("cx", pipPos.x);
+                pip.setAttribute("cy", pipPos.y);
+                pip.setAttribute("r", 0.8);
+                pip.setAttribute("class", "bezel-pip");
+                bezelMarksGroup.appendChild(pip);
+            } else {
+                if (i === 0) {
+                    const triR = BEZEL_CONFIG.radius;
+                    const t1 = polarToCartesian(triR - 4, 0);
+                    const t2 = polarToCartesian(triR + 4, -3);
+                    const t3 = polarToCartesian(triR + 4, 3);
+                    const d = `M ${t1.x} ${t1.y} L ${t2.x} ${t2.y} L ${t3.x} ${t3.y} Z`;
+                    bezelMarksGroup.appendChild(createPath(d, "bezel-triangle"));
+                } else {
+                    const txtPos = polarToCartesian(BEZEL_CONFIG.radius, angle);
+                    const txt = createText(BEZEL_NUMERALS[i], txtPos.x, txtPos.y, "bezel-text", true);
+                    txt.setAttribute("transform", `rotate(${angle + 90}, ${txtPos.x}, ${txtPos.y})`);
+                    bezelMarksGroup.appendChild(txt);
+                }
+            }
+        }
+    }
+
+    function drawStaticGrid() {
+        for (let i = 0; i < 12; i++) {
+            const angle = i * 30; 
+            // Use Palmette generator
+            let d = getPalmettePathData(angle);
+            
+            maskHolesGroup.appendChild(createPath(d, null));
+            let className = "shape hour-shape";
+            if (i % 3 === 0) className += " hour-cardinal";
+            hourRingGroup.appendChild(createPath(d, className));
+            staticGridGroup.appendChild(createPath(d, "backlight-shape"));
+
+            if (CARDINAL_NUMERALS[i] !== undefined) {
+                // UPDATED POSITION: Radius 54 (Center of the "belly" of the palmette)
+                const center = polarToCartesian(54, angle);
+                const textEl = createText(CARDINAL_NUMERALS[i], center.x, center.y, "numeral-text");
+                numeralsGroup.appendChild(textEl);
+            }
+        }
+
+        for (let i = 0; i < 60; i++) {
+            const angle = i * 6;
+            // Use Border/Arch generator
+            let d = getBorderMotifPathData(angle);
+            
+            maskHolesGroup.appendChild(createPath(d, null));
+            let className = "shape minute-slot-outline";
+            if (i % 5 === 0) className += " landmark";
+            minuteOutlineGroup.appendChild(createPath(d, className));
+            staticGridGroup.appendChild(createPath(d, "backlight-shape"));
+        }
+    }
+
+    function createCursors() {
+        // Hour Cursor = Palmette
+        const hourD = getPalmettePathData(0);
+        hourCursorGroup.appendChild(createPath(hourD, "hour-cursor-shape"));
+
+        // Minute Cursor = Border Arch
+        const minD = getBorderMotifPathData(0);
+        minuteCursorGroup.appendChild(createPath(minD, "minute-cursor-shape"));
+
+        // Second Cursor = Small Diamond/Star
+        const angle = 0;
+        const r = 90; // Moved out slightly to match new minute ring
+        const size = 2;
+        const p1 = {x: r+size, y:0};
+        const p2 = {x: r, y:size};
+        const p3 = {x: r-size, y:0};
+        const p4 = {x: r, y:-size};
+        let secD = `M ${p1.x} ${p1.y} L ${p2.x} ${p2.y} L ${p3.x} ${p3.y} L ${p4.x} ${p4.y} Z`;
+        secondCursorGroup.appendChild(createPath(secD, "second-cursor-shape"));
+    }
+
+    updateMedallion(''); 
+    drawStaticGrid();
+    drawConnectors();
+    drawBezel();
+    createCursors();
+
+    function updateClock() {
+        const now = new Date();
+        const hours = now.getHours();
+        const minutes = now.getMinutes();
+        const seconds = now.getSeconds();
+        const ms = now.getMilliseconds();
+
+        const secAngle = (seconds + ms / 1000) * 6;
+        const minAngle = (minutes * 6) + (seconds / 60 * 6) + (ms / 60000 * 6);
+        const hourAngle = ((hours % 12) * 30) + (minutes / 60 * 30);
+
+        secondCursorGroup.style.transform = `rotate(${secAngle}deg)`;
+        minuteCursorGroup.style.transform = `rotate(${minAngle}deg)`;
+        hourCursorGroup.style.transform = `rotate(${hourAngle}deg)`;
+        
+        needleRotator.style.transform = `rotate(${secAngle}deg)`;
+        
+        requestAnimationFrame(updateClock);
+    }
+    updateClock();
+</script>
+</body>
+</html>
