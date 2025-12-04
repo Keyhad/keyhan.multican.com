@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Persian Watch - Extended Collection</title>
+    <title>Persian Watch - Solid Lamp</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,263 +12,118 @@
     <style>
         /* --- THEME DEFINITIONS --- */
 
-        /* 1. ISFAHAN (Default - Blue/Gold/Turquoise Tiles) */
+        /* 1. ISFAHAN (Default) */
         :root {
             --bg-body: #010205;
+            --dial-g1: #1a237e; --dial-g2: #0d1333; --dial-g3: #000000;
+            --bezel-g1: #00695c; --bezel-g2: #004d40; --bezel-g3: #00251a;
+            --bezel-rim: #4e342e; --bezel-text: #fffde7;
+            --hour-glaze-1: #4dd0e1; --hour-glaze-2: #1a237e; --hour-glaze-3: #ffd700;
+            --star-g1: #80deea; --star-g2: #0097a7; --star-g3: #006064; --star-g4: #000000;
+            --text-g1: #fff9c4; --text-g2: #ffca28; --text-g3: #ff6f00;
             
-            /* Dial Background Gradient */
-            --dial-g1: #1a237e; 
-            --dial-g2: #0d1333;
-            --dial-g3: #000000;
-
-            /* Bezel Gradient (Ceramic) */
-            --bezel-g1: #00695c;
-            --bezel-g2: #004d40;
-            --bezel-g3: #00251a;
-            --bezel-rim: #4e342e;
-            --bezel-text: #fffde7;
-
-            /* Hour Marker Glaze */
-            --hour-glaze-1: #4dd0e1;
-            --hour-glaze-2: #1a237e;
-            --hour-glaze-3: #ffd700;
-
-            /* Center Star Ceramic */
-            --star-g1: #80deea;
-            --star-g2: #0097a7;
-            --star-g3: #006064;
-            --star-g4: #000000;
-
-            /* Numerals (Aged Gold) */
-            --text-g1: #fff9c4;
-            --text-g2: #ffca28;
-            --text-g3: #ff6f00;
-
-            /* Active Lights (Cursors) */
-            --hour-active: #ffc107;    
-            --minute-active: #26c6da;  
-            --second-active: #ff6f00;  
-            --cardinal-gold: #ffe082;
-
-            /* Grid Lines */
-            --line-color: #c5a059;     
-            --light-inactive: rgba(38, 198, 218, 0.03); 
+            /* High Visibility Colors */
+            --hour-active: #ffd740; 
+            --minute-active: #26c6da; 
+            --second-active: #ff6f00;
+            
+            --cardinal-gold: #ffe082; --line-color: #c5a059; --light-inactive: rgba(38, 198, 218, 0.03);
         }
 
-        /* 2. KASHAN (Rug - Deep Red/Navy/Cream) */
+        /* 2. KASHAN */
         body.theme-kashan {
             --bg-body: #0a0000;
-
-            --dial-g1: #68000d; /* Madder Red */
-            --dial-g2: #3e0008;
-            --dial-g3: #1a0002;
-
-            --bezel-g1: #1a237e; /* Navy border common in rugs */
-            --bezel-g2: #0d1333;
-            --bezel-g3: #000011;
-            --bezel-rim: #8d6e63;
-            --bezel-text: #fff8e1; /* Cream/Ivory */
-
-            --hour-glaze-1: #ff8a80;
-            --hour-glaze-2: #b71c1c;
-            --hour-glaze-3: #ffcdd2;
-
-            --star-g1: #ffcdd2;
-            --star-g2: #b71c1c;
-            --star-g3: #7f0000;
-            --star-g4: #210000;
-
-            --text-g1: #ffffff;
-            --text-g2: #ffebee;
-            --text-g3: #ef9a9a;
-
-            --hour-active: #ffab91;    
-            --minute-active: #fff59d;  
-            --second-active: #ff1744;  
-            --cardinal-gold: #ffccbc;
-
-            --line-color: #d7ccc8;     
-            --light-inactive: rgba(255, 205, 210, 0.05); 
+            --dial-g1: #68000d; --dial-g2: #3e0008; --dial-g3: #1a0002;
+            --bezel-g1: #1a237e; --bezel-g2: #0d1333; --bezel-g3: #000011;
+            --bezel-rim: #8d6e63; --bezel-text: #fff8e1;
+            --hour-glaze-1: #ff8a80; --hour-glaze-2: #b71c1c; --hour-glaze-3: #ffcdd2;
+            --star-g1: #ffcdd2; --star-g2: #b71c1c; --star-g3: #7f0000; --star-g4: #210000;
+            --text-g1: #ffffff; --text-g2: #ffebee; --text-g3: #ef9a9a;
+            
+            --hour-active: #ffab91; 
+            --minute-active: #fff59d; --second-active: #ff1744;
+            
+            --cardinal-gold: #ffccbc; --line-color: #d7ccc8; --light-inactive: rgba(255, 205, 210, 0.05);
         }
 
-        /* 3. YAZD (Desert - Sand/Adobe/Turquoise Water) */
+        /* 3. YAZD */
         body.theme-yazd {
             --bg-body: #1a1510;
-
-            --dial-g1: #8d6e63; /* Adobe/Earth */
-            --dial-g2: #5d4037;
-            --dial-g3: #3e2723;
-
-            --bezel-g1: #a1887f;
-            --bezel-g2: #795548;
-            --bezel-g3: #4e342e;
-            --bezel-rim: #3e2723;
-            --bezel-text: #e0f7fa; /* Water contrast */
-
-            --hour-glaze-1: #00bcd4; /* Turquoise Oasis */
-            --hour-glaze-2: #006064;
-            --hour-glaze-3: #e0f7fa;
-
-            --star-g1: #4dd0e1;
-            --star-g2: #00acc1;
-            --star-g3: #006064;
-            --star-g4: #000000;
-
-            --text-g1: #fff3e0;
-            --text-g2: #ffe0b2;
-            --text-g3: #ffcc80;
-
-            --hour-active: #00e5ff;    
-            --minute-active: #ffcc80;  
-            --second-active: #ff6e40;  
-            --cardinal-gold: #4dd0e1;
-
-            --line-color: #bcaaa4;     
-            --light-inactive: rgba(77, 208, 225, 0.05); 
+            --dial-g1: #8d6e63; --dial-g2: #5d4037; --dial-g3: #3e2723;
+            --bezel-g1: #a1887f; --bezel-g2: #795548; --bezel-g3: #4e342e;
+            --bezel-rim: #3e2723; --bezel-text: #e0f7fa;
+            --hour-glaze-1: #00bcd4; --hour-glaze-2: #006064; --hour-glaze-3: #e0f7fa;
+            --star-g1: #4dd0e1; --star-g2: #00acc1; --star-g3: #006064; --star-g4: #000000;
+            --text-g1: #fff3e0; --text-g2: #ffe0b2; --text-g3: #ffcc80;
+            
+            --hour-active: #00e5ff; 
+            --minute-active: #ffcc80; --second-active: #ff6e40;
+            
+            --cardinal-gold: #4dd0e1; --line-color: #bcaaa4; --light-inactive: rgba(77, 208, 225, 0.05);
         }
 
-        /* 4. SHIRAZ (Night/Poetry - Indigo/Purple/Silver) */
+        /* 4. SHIRAZ */
         body.theme-shiraz {
             --bg-body: #020005;
-
-            --dial-g1: #4a148c; /* Deep Purple */
-            --dial-g2: #311b92;
-            --dial-g3: #12002e;
-
-            --bezel-g1: #263238; /* Dark Slate */
-            --bezel-g2: #102027;
-            --bezel-g3: #000a12;
-            --bezel-rim: #90a4ae;
-            --bezel-text: #eceff1; 
-
-            --hour-glaze-1: #e1bee7;
-            --hour-glaze-2: #7b1fa2;
-            --hour-glaze-3: #f3e5f5;
-
-            --star-g1: #b39ddb;
-            --star-g2: #5e35b1;
-            --star-g3: #311b92;
-            --star-g4: #000000;
-
-            --text-g1: #ffffff;
-            --text-g2: #cfd8dc;
-            --text-g3: #90a4ae; /* Silver Text */
-
-            --hour-active: #e040fb;    
-            --minute-active: #b2ebf2;  
-            --second-active: #7c4dff;  
-            --cardinal-gold: #e1bee7;
-
-            --line-color: #78909c;     
-            --light-inactive: rgba(224, 64, 251, 0.04); 
+            --dial-g1: #004d40; --dial-g2: #00251a; --dial-g3: #000000;
+            --bezel-g1: #5d4037; --bezel-g2: #3e2723; --bezel-g3: #1b0000;
+            --bezel-rim: #d7ccc8; --bezel-text: #e0f2f1;
+            --hour-glaze-1: #26a69a; --hour-glaze-2: #004d40; --hour-glaze-3: #80cbc4;
+            --star-g1: #80cbc4; --star-g2: #00695c; --star-g3: #004d40; --star-g4: #000000;
+            --text-g1: #ffffff; --text-g2: #b2dfdb; --text-g3: #00695c;
+            
+            --hour-active: #1de9b6; 
+            --minute-active: #ffab91; --second-active: #ff6e40;
+            
+            --cardinal-gold: #b2dfdb; --line-color: #4db6ac; --light-inactive: rgba(38, 166, 154, 0.05);
         }
 
-        /* 5. KERMAN (Floral/Pistachio - Olive/Pink/Cream) */
+        /* 5. KERMAN */
         body.theme-kerman {
             --bg-body: #0f140a;
-
-            --dial-g1: #33691e; /* Deep Olive/Pistachio Leaf */
-            --dial-g2: #1b5e20;
-            --dial-g3: #051002;
-
-            --bezel-g1: #558b2f;
-            --bezel-g2: #33691e;
-            --bezel-g3: #1b5e20;
-            --bezel-rim: #8d6e63; /* Wood tone */
-            --bezel-text: #f1f8e9; 
-
-            --hour-glaze-1: #f48fb1; /* Rose Pink */
-            --hour-glaze-2: #ad1457;
-            --hour-glaze-3: #fce4ec;
-
-            --star-g1: #dcedc8; /* Light Pistachio */
-            --star-g2: #8bc34a;
-            --star-g3: #33691e;
-            --star-g4: #000000;
-
-            --text-g1: #fffde7;
-            --text-g2: #fff59d;
-            --text-g3: #f0f4c3;
-
-            --hour-active: #f06292;    /* Rose */
-            --minute-active: #cddc39;  /* Lime */
-            --second-active: #e91e63;  /* Deep Pink */
-            --cardinal-gold: #f8bbd0;
-
-            --line-color: #a5d6a7;     
-            --light-inactive: rgba(244, 143, 177, 0.05); 
+            --dial-g1: #33691e; --dial-g2: #1b5e20; --dial-g3: #051002;
+            --bezel-g1: #558b2f; --bezel-g2: #33691e; --bezel-g3: #1b5e20;
+            --bezel-rim: #8d6e63; --bezel-text: #f1f8e9;
+            --hour-glaze-1: #f48fb1; --hour-glaze-2: #ad1457; --hour-glaze-3: #fce4ec;
+            --star-g1: #dcedc8; --star-g2: #8bc34a; --star-g3: #33691e; --star-g4: #000000;
+            --text-g1: #fffde7; --text-g2: #fff59d; --text-g3: #f0f4c3;
+            
+            --hour-active: #ff4081; 
+            --minute-active: #cddc39; --second-active: #e91e63;
+            
+            --cardinal-gold: #f8bbd0; --line-color: #a5d6a7; --light-inactive: rgba(244, 143, 177, 0.05);
         }
 
-        /* 6. QOM (Silk/Mirror - Silver/Teal/Glass) */
+        /* 6. QOM */
         body.theme-qom {
             --bg-body: #000505;
-
-            --dial-g1: #37474f; /* Gunmetal/Silk Grey */
-            --dial-g2: #263238;
-            --dial-g3: #000000;
-
-            --bezel-g1: #b0bec5; /* Silver/Platinum */
-            --bezel-g2: #78909c;
-            --bezel-g3: #455a64;
-            --bezel-rim: #eceff1;
-            --bezel-text: #000000; /* Dark text on light bezel */
-
-            --hour-glaze-1: #80deea; /* Cyan/Glass */
-            --hour-glaze-2: #006064;
-            --hour-glaze-3: #e0f7fa;
-
-            --star-g1: #ffffff;
-            --star-g2: #b0bec5;
-            --star-g3: #546e7a;
-            --star-g4: #000000;
-
-            --text-g1: #ffffff;
-            --text-g2: #e0f7fa;
-            --text-g3: #4dd0e1;
-
-            --hour-active: #00e5ff;    
-            --minute-active: #ffffff;  
-            --second-active: #18ffff;  
-            --cardinal-gold: #b2ebf2;
-
-            --line-color: #cfd8dc;     
-            --light-inactive: rgba(255, 255, 255, 0.03); 
+            --dial-g1: #37474f; --dial-g2: #263238; --dial-g3: #000000;
+            --bezel-g1: #b0bec5; --bezel-g2: #78909c; --bezel-g3: #455a64;
+            --bezel-rim: #eceff1; --bezel-text: #000000;
+            --hour-glaze-1: #80deea; --hour-glaze-2: #006064; --hour-glaze-3: #e0f7fa;
+            --star-g1: #ffffff; --star-g2: #b0bec5; --star-g3: #546e7a; --star-g4: #000000;
+            --text-g1: #ffffff; --text-g2: #e0f7fa; --text-g3: #4dd0e1;
+            
+            --hour-active: #ffffff; 
+            --minute-active: #ffffff; --second-active: #18ffff;
+            
+            --cardinal-gold: #b2ebf2; --line-color: #cfd8dc; --light-inactive: rgba(255, 255, 255, 0.03);
         }
 
-        /* 7. MASHHAD (Shrine/Deep Red - Burgundy/Gold/Black) */
+        /* 7. MASHHAD */
         body.theme-mashhad {
             --bg-body: #0f0005;
-
-            --dial-g1: #880e4f; /* Deep Burgundy/Cochineal */
-            --dial-g2: #4a0020;
-            --dial-g3: #1a0005;
-
-            --bezel-g1: #212121; /* Black Stone */
-            --bezel-g2: #000000;
-            --bezel-g3: #000000;
-            --bezel-rim: #ffb300; /* Heavy Gold Rim */
-            --bezel-text: #ffca28; 
-
-            --hour-glaze-1: #ffc107; /* Gold Glaze */
-            --hour-glaze-2: #ff6f00;
-            --hour-glaze-3: #fff8e1;
-
-            --star-g1: #ffecb3;
-            --star-g2: #ffca28;
-            --star-g3: #ff6f00;
-            --star-g4: #3e2723;
-
-            --text-g1: #fff8e1;
-            --text-g2: #ffe082;
-            --text-g3: #ffb300;
-
-            --hour-active: #ffd740;    
-            --minute-active: #ffab40;  
-            --second-active: #d50000;  /* Blood Red */
-            --cardinal-gold: #ffecb3;
-
-            --line-color: #8d6e63;     
-            --light-inactive: rgba(255, 193, 7, 0.04); 
+            --dial-g1: #880e4f; --dial-g2: #4a0020; --dial-g3: #1a0005;
+            --bezel-g1: #212121; --bezel-g2: #000000; --bezel-g3: #000000;
+            --bezel-rim: #ffb300; --bezel-text: #ffca28;
+            --hour-glaze-1: #ffc107; --hour-glaze-2: #ff6f00; --hour-glaze-3: #fff8e1;
+            --star-g1: #ffecb3; --star-g2: #ffca28; --star-g3: #ff6f00; --star-g4: #3e2723;
+            --text-g1: #fff8e1; --text-g2: #ffe082; --text-g3: #ffb300;
+            
+            --hour-active: #ffeb3b; 
+            --minute-active: #ffab40; --second-active: #d50000;
+            
+            --cardinal-gold: #ffecb3; --line-color: #8d6e63; --light-inactive: rgba(255, 193, 7, 0.04);
         }
 
         /* --- LAYOUT & BASE STYLES --- */
@@ -285,7 +140,6 @@
             transition: background-color 0.8s ease;
         }
 
-        /* --- THEME SELECTOR UI --- */
         .theme-control {
             position: absolute;
             top: 30px;
@@ -323,7 +177,6 @@
             background: rgba(0,0,0,0.8);
         }
 
-        /* --- WATCH STYLES --- */
         .watch-container {
             position: relative;
             width: 90vmin;
@@ -383,15 +236,31 @@
 
         .cursor-group { transform-origin: 0px 0px; }
 
+        /* --- SOLID LAMP BRIGHTNESS FIX --- */
         .hour-cursor-shape {
-            fill: var(--hour-active);
-            filter: drop-shadow(0 0 5px var(--hour-active)) drop-shadow(0 0 15px var(--hour-active));
-            transition: fill 0.8s ease;
+            /* Use the special gradient that makes it look like a bulb */
+            fill: url(#lamp-gradient);
+            
+            /* Thick white rim to define the edge */
+            stroke: #ffffff; 
+            stroke-width: 1.5px; 
+            
+            /* NO blend mode. This makes it solid and opaque */
+            mix-blend-mode: normal; 
+            
+            /* Strong glow outside the solid shape */
+            filter: 
+                drop-shadow(0 0 5px var(--hour-active)) 
+                drop-shadow(0 0 15px var(--hour-active));
+            
+            opacity: 1;
+            transition: filter 0.8s ease;
         }
 
         .minute-cursor-shape {
             fill: var(--minute-active);
-            filter: drop-shadow(0 0 4px var(--minute-active)) drop-shadow(0 0 10px var(--minute-active));
+            filter: drop-shadow(0 0 4px var(--minute-active));
+            mix-blend-mode: screen; /* Minute can stay blended as it's smaller */
             transition: fill 0.8s ease;
         }
 
@@ -403,7 +272,6 @@
             transition: fill 0.8s ease;
         }
 
-        /* --- CALLIGRAPHY STYLING --- */
         .numeral-text {
             fill: url(#aged-gold-text); 
             font-family: 'Rakkas', serif; 
@@ -452,7 +320,6 @@
             stroke-linecap: butt;
         }
 
-        /* --- BEZEL STYLES --- */
         .bezel-ring {
             fill: url(#bezel-ceramic-grad);
             stroke: var(--bezel-rim);
@@ -491,15 +358,15 @@
 <body>
 
 <div class="theme-control">
-    <span class="theme-label">Palette</span>
+    <span class="theme-label">Medallion Style</span>
     <select id="theme-selector">
-        <option value="">Isfahan (Haft Rang)</option>
-        <option value="theme-kashan">Kashan (Rug)</option>
-        <option value="theme-yazd">Yazd (Desert)</option>
-        <option value="theme-shiraz">Shiraz (Night)</option>
-        <option value="theme-kerman">Kerman (Pistachio)</option>
-        <option value="theme-qom">Qom (Silk & Mirror)</option>
-        <option value="theme-mashhad">Mashhad (Shrine)</option>
+        <option value="">Isfahan (Rosette)</option>
+        <option value="theme-kashan">Kashan (Ogive)</option>
+        <option value="theme-yazd">Yazd (Octagram)</option>
+        <option value="theme-shiraz">Shiraz (Hafez Mosaic)</option>
+        <option value="theme-kerman">Kerman (Sunburst)</option>
+        <option value="theme-qom">Qom (Silk Star)</option>
+        <option value="theme-mashhad">Mashhad (Shrine Dome)</option>
     </select>
 </div>
 
@@ -512,6 +379,13 @@
                 <stop offset="100%" style="stop-color:var(--dial-g3); stop-opacity:1" />
             </radialGradient>
             
+            <!-- THE LAMP GRADIENT: Pure white center, Theme color edge -->
+            <radialGradient id="lamp-gradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+                <stop offset="0%" style="stop-color:#ffffff; stop-opacity:1" />
+                <stop offset="60%" style="stop-color:#ffffff; stop-opacity:1" />
+                <stop offset="100%" style="stop-color:var(--hour-active); stop-opacity:1" />
+            </radialGradient>
+
             <radialGradient id="hour-lens-grad" cx="30%" cy="30%" r="80%" fx="30%" fy="30%">
                 <stop offset="0%" style="stop-color:rgba(255,255,255,0.15); stop-opacity:1" />
                 <stop offset="100%" style="stop-color:rgba(0,0,0,0.6); stop-opacity:1" />
@@ -600,7 +474,7 @@
         <g id="hour-ring"></g>
         <g id="minute-ring-outlines"></g>
         
-        <!-- LAYER 6: The Static Center Star -->
+        <!-- LAYER 6: The Rotating Medallion -->
         <rect x="-30" y="-30" width="60" height="60" 
               class="metal-texture-fill" 
               mask="url(#static-star-mask)" />
@@ -639,17 +513,126 @@
 
     const OUTER_RING_CONFIG = { r1: 70, r2: 82, r3: 94, widthAngle: 2.2, roundness: 0.2 };
     const HOUR_RING_CONFIG = { r1: 25, r2: 48, r3: 65, angleSpread: 12, roundness: 0.15 };
-    const STAR_CONFIG = { outerRadius: 18, innerRadius: 8 };
     const BEZEL_CONFIG = { radius: 106 };
 
     const CARDINAL_NUMERALS = { 0: "١٢", 3: "٣", 6: "٦", 9: "٩" };
     const BEZEL_NUMERALS = { 0: "", 10: "١٠", 20: "٢٠", 30: "٣٠", 40: "٤٠", 50: "٥٠" };
 
-    // --- THEME SWITCHER LOGIC ---
+    // --- MEDALLION GENERATORS ---
+    function polarToCartesian(radius, angleInDegrees) {
+        const angleInRadians = (angleInDegrees) * Math.PI / 180.0;
+        return {
+            x: (radius * Math.cos(angleInRadians)),
+            y: (radius * Math.sin(angleInRadians))
+        };
+    }
+
+    function generateStar(points, rOuter, rInner, roundness) {
+        const vertices = [];
+        for (let i = 0; i < points * 2; i++) {
+            let r = (i % 2 === 0) ? rOuter : rInner;
+            let angle = i * (360 / (points * 2));
+            vertices.push(polarToCartesian(r, angle));
+        }
+        const lerp = (p1, p2, t) => ({ x: p1.x + (p2.x - p1.x) * t, y: p1.y + (p2.y - p1.y) * t });
+        let d = "";
+        const len = vertices.length;
+        const startPoint = lerp(vertices[len - 1], vertices[0], 0.5);
+        d += `M ${startPoint.x} ${startPoint.y} `;
+        for (let i = 0; i < len; i++) {
+            const current = vertices[i];
+            const next = vertices[(i + 1) % len];
+            const prev = vertices[(i - 1 + len) % len];
+            const pEndCurve = lerp(current, next, roundness);
+            const pStartCurve = lerp(prev, current, 1 - roundness);
+            d += `L ${pStartCurve.x} ${pStartCurve.y} `;
+            d += `Q ${current.x} ${current.y} ${pEndCurve.x} ${pEndCurve.y} `;
+        }
+        d += "Z"; 
+        return d;
+    }
+
+    function generateRosette(lobes, rOuter, rInner) {
+        let d = "";
+        for (let i = 0; i < lobes; i++) {
+            const angleStart = i * (360 / lobes);
+            const angleEnd = (i + 1) * (360 / lobes);
+            const angleMid = angleStart + (360 / lobes) / 2;
+            
+            const pStart = polarToCartesian(rInner, angleStart);
+            const pMid = polarToCartesian(rOuter, angleMid);
+            const pEnd = polarToCartesian(rInner, angleEnd);
+
+            if (i === 0) d += `M ${pStart.x} ${pStart.y} `;
+            // Quadratic curve to tip, then back
+            d += `Q ${polarToCartesian(rOuter*0.8, angleStart + 5).x} ${polarToCartesian(rOuter*0.8, angleStart + 5).y} ${pMid.x} ${pMid.y} `;
+            d += `Q ${polarToCartesian(rOuter*0.8, angleEnd - 5).x} ${polarToCartesian(rOuter*0.8, angleEnd - 5).y} ${pEnd.x} ${pEnd.y} `;
+        }
+        d += "Z";
+        return d;
+    }
+
+    function generateOgive() {
+        // Kashan style
+        return `M 0 -22 C 12 -15 18 -8 18 0 C 18 8 12 15 0 22 C -12 15 -18 8 -18 0 C -18 -8 -12 -15 0 -22 Z`;
+    }
+
+    function generateHafezMosaic() {
+        // Shiraz: Hafez Tomb Ceiling Mosaic style
+        // A 16-point sunburst with curved valleys to mimic the tile arches
+        const points = 16;
+        const rOuter = 23;
+        const rInner = 8;
+        let d = "";
+        for (let i = 0; i < points * 2; i++) {
+            const isOuter = i % 2 === 0;
+            const r = isOuter ? rOuter : rInner;
+            const angle = i * (360 / (points * 2));
+            const p = polarToCartesian(r, angle);
+            
+            if (i === 0) d += `M ${p.x} ${p.y} `;
+            else {
+                if (isOuter) {
+                    // Line coming OUT from center valley to tip: Straight or slightly convex
+                    d += `L ${p.x} ${p.y} `;
+                } else {
+                    // Line going IN from tip to valley: Curve it slightly inward to mimic the arch
+                    // We need the previous point (the tip)
+                    const prevAngle = (i - 1) * (360 / (points * 2));
+                    const prevP = polarToCartesian(rOuter, prevAngle);
+                    // Control point slightly inside
+                    const cpAngle = angle - (360/(points*2))/2;
+                    const cp = polarToCartesian(r + 2, cpAngle); // Slight bulge
+                    d += `Q ${cp.x} ${cp.y} ${p.x} ${p.y} `;
+                }
+            }
+        }
+        d += "Z";
+        return d;
+    }
+
+    function updateMedallion(theme) {
+        let d = "";
+        switch(theme) {
+            case 'theme-kashan': d = generateOgive(); break;
+            case 'theme-yazd': d = generateStar(8, 20, 12, 0.1); break; // Sharp Octagram
+            case 'theme-shiraz': d = generateHafezMosaic(); break; // Hafez Tomb Mosaic
+            case 'theme-kerman': d = generateRosette(12, 22, 8); break; // Complex Sunburst
+            case 'theme-qom': d = generateStar(16, 21, 15, 0.05); break; // Fine Silk Star
+            case 'theme-mashhad': d = generateRosette(16, 20, 16); break; // Dome/Circle
+            default: d = generateRosette(8, 20, 10); break; // Isfahan (Default)
+        }
+        starGeomDef.setAttribute("d", d);
+    }
+
+    // --- THEME SWITCHER ---
     themeSelector.addEventListener('change', (e) => {
-        document.body.className = e.target.value;
+        const val = e.target.value;
+        document.body.className = val;
+        updateMedallion(val);
     });
 
+    // --- INITIALIZATION HELPERS ---
     function createPath(d, className, id) {
         const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
         path.setAttribute("d", d);
@@ -670,14 +653,6 @@
         return t;
     }
 
-    function polarToCartesian(radius, angleInDegrees) {
-        const angleInRadians = (angleInDegrees) * Math.PI / 180.0;
-        return {
-            x: (radius * Math.cos(angleInRadians)),
-            y: (radius * Math.sin(angleInRadians))
-        };
-    }
-
     function createRoundedDiamondPath(p1, p2, p3, p4, roundness) {
         const lerp = (a, b, t) => ({ x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t });
         const p1_a = lerp(p1, p2, roundness);
@@ -694,35 +669,6 @@
                 L ${p3_b.x} ${p3_b.y} Q ${p3.x} ${p3.y} ${p3_a.x} ${p3_a.y}
                 L ${p4_b.x} ${p4_b.y} Q ${p4.x} ${p4.y} ${p4_a.x} ${p4_a.y}
                 L ${p1_b.x} ${p1_b.y} Q ${p1.x} ${p1.y} ${p1_a.x} ${p1_a.y} Z`;
-    }
-
-    function defineCenterStar() {
-        const points = 12;
-        const outerRadius = STAR_CONFIG.outerRadius;
-        const innerRadius = STAR_CONFIG.innerRadius;
-        const roundness = 0.35; 
-        const vertices = [];
-        for (let i = 0; i < points * 2; i++) {
-            let r = (i % 2 === 0) ? outerRadius : innerRadius;
-            let angle = i * (360 / (points * 2));
-            vertices.push(polarToCartesian(r, angle));
-        }
-        const lerp = (p1, p2, t) => ({ x: p1.x + (p2.x - p1.x) * t, y: p1.y + (p2.y - p1.y) * t });
-        let d = "";
-        const len = vertices.length;
-        const startPoint = lerp(vertices[len - 1], vertices[0], 0.5);
-        d += `M ${startPoint.x} ${startPoint.y} `;
-        for (let i = 0; i < len; i++) {
-            const current = vertices[i];
-            const next = vertices[(i + 1) % len];
-            const prev = vertices[(i - 1 + len) % len];
-            const pEndCurve = lerp(current, next, roundness);
-            const pStartCurve = lerp(prev, current, 1 - roundness);
-            d += `L ${pStartCurve.x} ${pStartCurve.y} `;
-            d += `Q ${current.x} ${current.y} ${pEndCurve.x} ${pEndCurve.y} `;
-        }
-        d += "Z "; 
-        starGeomDef.setAttribute("d", d);
     }
 
     function getHourPathData(angle) {
@@ -747,7 +693,7 @@
     function drawConnectors() {
         const cardinals = [0, 90, 180, 270];
         cardinals.forEach(angle => {
-            const startP = polarToCartesian(STAR_CONFIG.outerRadius, angle);
+            const startP = polarToCartesian(20, angle); // Start from medallion edge approx
             const endP = polarToCartesian(HOUR_RING_CONFIG.r1, angle);
             const angleRad = angle * Math.PI / 180;
             const perpAngle = angleRad + Math.PI / 2;
@@ -862,7 +808,7 @@
         secondCursorGroup.appendChild(createPath(secD, "second-cursor-shape"));
     }
 
-    defineCenterStar();
+    updateMedallion(''); // Init default Isfahan
     drawStaticGrid();
     drawConnectors();
     drawBezel();
